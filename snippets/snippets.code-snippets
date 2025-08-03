@@ -1,0 +1,91 @@
+{
+  "React Native Component": {
+    "prefix": "rn-c",
+    "body": [
+      "import { View } from 'react-native';",
+      "",
+      "import { styles } from './styles';",
+      "",
+      "export function ${TM_DIRECTORY/.*[\\\\\\/](.*)$/$1/}() {",
+      "  return (",
+      "    <View style={styles.container}>",
+      "",
+      "    </View>",
+      "  );",
+      "}"
+    ],
+    "description": "Create the structure of a React Native Component"
+  },
+  "StyleSheet React Native Object": {
+    "prefix": "rn-ss",
+    "body": [
+      "import { StyleSheet } from 'react-native';",
+      "",
+      "export const styles = StyleSheet.create({",
+      "  container: {}",
+      "});"
+    ],
+    "description": "Create a style object with Stylesheet on separate file."
+  },
+  "React Native Styled Component": {
+    "prefix": "rn-sc",
+    "body": [
+      "import { Container } from './styles';",
+      "",
+      "export function ${TM_DIRECTORY/.*[\\\\\\/](.*)$/$1/}() {",
+      "  return (",
+      "    <Container>",
+      "",
+      "    </Container>",
+      "  );",
+      "}"
+    ],
+    "description": "Create the structure of a React Native with Styled Component"
+  },
+  "React Native Styled Component StyleSheet": {
+    "prefix": "rn-scs",
+    "body": [
+      "import styled from 'styled-components/native';",
+      "",
+      "export const Container = styled.View`",
+      "  flex: 1;",
+      "`;"
+    ],
+    "description": "Create the structure of Styled Component StyleSheet"
+  },
+  "Hook useState": {
+    "prefix": "st",
+    "body": ["const [ ${1:propertyName}, ${2:propertyName} ] = useState()"],
+    "description": "Creates and assigns a local variable using array destructing"
+  },
+  "Hook useEffect": {
+    "prefix": "ef",
+    "body": ["useEffect(() => {}, []);"],
+    "description": "Created useEffect"
+  },
+  "Object Destructing": {
+    "prefix": "od",
+    "body": "const {${1:propertyName}} = ${2:objectToDestruct}",
+    "description": "Creates and assigns a local variable using object destructing"
+  },
+  "Basic Method": {
+    "prefix": "fn",
+    "body": ["function ${1:methodName}(${2:params}) {", "  ${0}", "}", ""],
+    "description": "Create a method structure"
+  },
+  "Basic Method Async": {
+    "prefix": "fn-async",
+    "body": [
+      "async function ${1:methodName}(${2:params}) {",
+      "  ${0}",
+      "}",
+      ""
+    ],
+    "description": "Create a method async structure"
+  },
+  "Console Log": {
+    "prefix": "cl",
+    "body": "console.log(${1:object})",
+    "description": "Log to the console"
+  }
+}
