@@ -63,7 +63,7 @@ Any contribution you make will be **much appreciated**.
 
 ## Licença
 
-Este projeto é derivado de [rocketseat-vscode-react-native-snippets](https://github.com/Rocketseat/rocketseat-vscode-react-native-snippets), originalmente publicado por Rocketseat sob a licença MIT.
+Este projeto é derivado de [rocketseat-vscode-react-native-snippets](https://github.com/Rocketseat/rocketseat-vscode-react-native-snippets), originalmente criado por **Claudio Junior** e publicado por **Rocketseat** sob a licença MIT.
 
 O código foi modificado por Fabiano C. Souza em 2025 e redistribuído conforme os termos da licença MIT.
 
