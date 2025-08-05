@@ -7,12 +7,8 @@
     "name": "Fabiano C. Souza"
   },
   "icon": "assets/icon.png",
-  "galleryBanner": {
-    "color": "#D9EAFF",
-    "theme": "dark"
-  },
   "license": "MIT",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/fabianocsouza/rn-shortcut.git"
