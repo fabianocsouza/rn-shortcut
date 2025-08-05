@@ -4,7 +4,12 @@
   "description": "Being productive by creating React Native components.",
   "publisher": "fabianocs",
   "author": {
-    "name": "Fabiano Cardozo de Souza"
+    "name": "Fabiano C. Souza"
+  },
+  "icon": "assets/icon.png",
+  "galleryBanner": {
+    "color": "#D9EAFF",
+    "theme": "dark"
   },
   "license": "MIT",
   "version": "0.0.1",
@@ -20,7 +25,6 @@
     "shortcut",
     "components"
   ],
-  "icon": "assets/icon.png",
   "engines": {
     "vscode": "^1.102.0"
   },
@@ -33,5 +37,8 @@
         "path": "./snippets/snippets.code-snippets"
       }
     ]
+  },
+  "devDependencies": {
+    "@vscode/vsce": "^3.6.0"
   }
 }
