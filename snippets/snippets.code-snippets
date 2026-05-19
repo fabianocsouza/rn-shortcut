@@ -1,6 +1,38 @@
 {
   "React Native Component": {
-    "prefix": "rn-c",
+    "prefix": "rn",
+    "body": [
+      "import { View } from 'react-native';",
+      "",
+      "export function ${TM_DIRECTORY/.*[\\\\\\/](.*)$/$1/}() {",
+      "  return (",
+      "    <View></View>",
+      "  );",
+      "}",
+    ],
+    "description": "Create the structure of a React Native Component.",
+  },
+  "React Native StyleSheet Component": {
+    "prefix": "rn-s",
+    "body": [
+      "import { View, StyleSheet } from 'react-native';",
+      "",
+      "export function ${TM_DIRECTORY/.*[\\\\\\/](.*)$/$1/}() {",
+      "  return (",
+      "    <View style={styles.container}>",
+      "",
+      "    </View>",
+      "  );",
+      "}",
+      "",
+      "const styles = StyleSheet.create({",
+      "container: {},",
+      "});",
+    ],
+    "description": "Component with inline StyleSheet.",
+  },
+  "React Native Import StyleSheet Component": {
+    "prefix": "rn-si",
     "body": [
       "import { View } from 'react-native';",
       "",
@@ -12,20 +44,9 @@
       "",
       "    </View>",
       "  );",
-      "}"
+      "}",
     ],
-    "description": "Create the structure of a React Native Component"
-  },
-  "StyleSheet React Native Object": {
-    "prefix": "rn-ss",
-    "body": [
-      "import { StyleSheet } from 'react-native';",
-      "",
-      "export const styles = StyleSheet.create({",
-      "  container: {}",
-      "});"
-    ],
-    "description": "Create a style object with Stylesheet on separate file."
+    "description": "Component importing styles from ./styles.",
   },
   "React Native Styled Component": {
     "prefix": "rn-sc",
@@ -38,40 +59,51 @@
       "",
       "    </Container>",
       "  );",
-      "}"
+      "}",
     ],
-    "description": "Create the structure of a React Native with Styled Component"
+    "description": "Component using Styled Components.",
   },
-  "React Native Styled Component StyleSheet": {
-    "prefix": "rn-scs",
+  "React Native StyleSheet File": {
+    "prefix": "rn-style",
+    "body": [
+      "import { StyleSheet } from 'react-native';",
+      "",
+      "export const styles = StyleSheet.create({",
+      "  container: {}",
+      "});",
+    ],
+    "description": "StyleSheet file for a React Native component.",
+  },
+  "React Native Styled Components File": {
+    "prefix": "rn-styled",
     "body": [
       "import styled from 'styled-components/native';",
       "",
       "export const Container = styled.View`",
       "  flex: 1;",
-      "`;"
+      "`;",
     ],
-    "description": "Create the structure of Styled Component StyleSheet"
+    "description": "Styled Components file for a React Native component.",
   },
   "Hook useState": {
-    "prefix": "st",
-    "body": ["const [ ${1:propertyName}, ${2:propertyName} ] = useState()"],
-    "description": "Creates and assigns a local variable using array destructing"
+    "prefix": "ust",
+    "body": ["const [ ${1:state}, ${2:setState} ] = useState(${3})"],
+    "description": "React useState hook.",
   },
   "Hook useEffect": {
-    "prefix": "ef",
+    "prefix": "uef",
     "body": ["useEffect(() => {}, []);"],
-    "description": "Created useEffect"
+    "description": "React useEffect hook.",
   },
-  "Object Destructing": {
+  "Object Destructuring": {
     "prefix": "od",
     "body": "const {${1:propertyName}} = ${2:objectToDestruct}",
-    "description": "Creates and assigns a local variable using object destructing"
+    "description": "Object destructuring assignment.",
   },
   "Basic Method": {
     "prefix": "fn",
     "body": ["function ${1:methodName}(${2:params}) {", "  ${0}", "}", ""],
-    "description": "Create a method structure"
+    "description": "Create a method structure.",
   },
   "Basic Method Async": {
     "prefix": "fn-async",
@@ -79,13 +111,13 @@
       "async function ${1:methodName}(${2:params}) {",
       "  ${0}",
       "}",
-      ""
+      "",
     ],
-    "description": "Create a method async structure"
+    "description": "Create an async function structure.",
   },
   "Console Log": {
     "prefix": "cl",
     "body": "console.log(${1:object})",
-    "description": "Log to the console"
-  }
+    "description": "Log to the console.",
+  },
 }

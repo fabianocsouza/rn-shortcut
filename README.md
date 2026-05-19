@@ -1,56 +1,69 @@
 <!--
 *** Thank you to see this README.
-*** If you have a suggestion that can improve it more than a
+*** If you have a suggestion that can improve it,
 *** fork and create a Pull Request or open an Issue with a "suggestion" tag.
 *** Thank you a lot!
 -->
 
 <h1 align="center">
   <img alt="React Native Shortcut" width="90%" title="React Native Shortcut" src="./assets/header.png" />
-  </br></br>
 </h1>
 
-<h1 style="justify-content: center;  align-items: center; gap: 20px;">
-  <img alt="image1" width="100%" style="border-radius: 10px;" title="image1" src=".github/image1.gif" />
-  <img alt="image2" width="100%" style="border-radius: 10px;" title="image2" src=".github/image2.gif" />
+</br>
+
+<h1>
+ <img alt="image1" width="100%" style="border-radius: 5%;" src=".github/image1.gif" title="image1"/>
+<img alt="image2" width="100%" style="border-radius: 5%;" src=".github/image2.gif" title="image2"/>
 </h1>
+
 </br>
 
 ## About
 
-This extension makes available a set of Snippets to create components for React Native applications.
+This extension provides a set of snippets to help you create React Native components faster.
 
-### Supported languages (file extensions)
+### Supported languages
 
 - JavaScript
 - TypeScript
 
+---
+
 ## Getting started
 
-Open any file with Visual Studio Code, and type `rn-c` and press `Tab` keyboard to create a new React Native Basic Component.
-You can too create a new with Stylesheet to custom our React Native Interfaces typing inside your file `rn-ss` and press `Tab` keyboard to create.
+Open any `.js` or `.ts` file in VS Code, type a snippet prefix and press `Tab`.
 
-### Snippets
+Example: type `rn` and press `Tab` to create a basic React Native component.
 
-List of available Snippets. Or **⇥** means the `TAB` key.
+---
 
-|    Snippet | Content                                                       |
-| ---------: | ------------------------------------------------------------- |
-|   `rn-c →` | Create a new **React Native Component**                       |
-|  `rn-ss →` | Create a new **React Native Stylesheet Component**            |
-|  `rn-sc →` | Create a new **React Native Component with Styled Component** |
-| `rn-scs →` | Create a new **Styled Component File**                        |
+## Snippets
 
-### Shortcuts
+List of available snippets. **⇥** means the `TAB` key.
 
-|  Snippet | Content                             |
-| -------: | ----------------------------------- |
-|   `st →` | Create a new **useState**           |
-|   `ef →` | Create a new **useEffect**          |
-|   `od →` | Create a new **Object Destructing** |
-|   `cl →` | Create a new **Console Log**        |
-|   `fn →` | Create a new **Basic Method**       |
-| `fn-a →` | Create a new **Basic Method Async** |
+|       Snippet | Content                                                    |
+| ------------: | ---------------------------------------------------------- |
+|        `rn →` | Create a **React Native Component**                        |
+|      `rn-s →` | Create a **React Native Component** with inline StyleSheet |
+|     `rn-si →` | Create a **React Native Component** importing `./styles`   |
+|     `rn-sc →` | Create a **React Native Component** with Styled Components |
+|  `rn-style →` | Create a **StyleSheet** file (`styles.ts`)                 |
+| `rn-styled →` | Create a **Styled Components** file (`styles.ts`)          |
+
+---
+
+## Shortcuts
+
+|      Snippet | Content                               |
+| -----------: | ------------------------------------- |
+|      `ust →` | Create a new **useState**             |
+|      `uef →` | Create a new **useEffect**            |
+|       `od →` | Create a new **Object Destructuring** |
+|       `fn →` | Create a new **Function**             |
+| `fn-async →` | Create a new **Async Function**       |
+|       `cl →` | Create a new **Console Log**          |
+
+---
 
 ## Contribution
 
@@ -58,15 +71,15 @@ Any contribution you make will be **much appreciated**.
 
 #### Find me elsewhere
 
-[![Linkedin Badge](https://img.shields.io/badge/-Linkedin-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/fabianocsouza/)](https://www.linkedin.com/in/fabianocsouza/)
+[![Linkedin Badge](https://img.shields.io/badge/-Linkedin-blue?style=flat-square&logo=Linkedin&logoColor=white)](https://www.linkedin.com/in/fabianocsouza/)
 [![Github Badge](https://img.shields.io/badge/-github.com/fabianocsouza-black?style=flat-square&logo=Github&logoColor=white)](https://github.com/fabianocsouza)
 
-</br></br>
+</br>
 
-![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-Este projeto é derivado de [rocketseat-vscode-react-native-snippets](https://github.com/Rocketseat/rocketseat-vscode-react-native-snippets), originalmente criado por **Claudio Junior** e publicado por **Rocketseat** sob a licença MIT.
+This project is derived from [rocketseat-vscode-react-native-snippets](https://github.com/Rocketseat/rocketseat-vscode-react-native-snippets), originally created by **Claudio Junior** and published by **Rocketseat** under the MIT license.
 
-Modificado por Fabiano C. Souza em 2025 e redistribuído conforme os termos da licença MIT.
+Modified by Fabiano C. Souza in 2025 and redistributed under the terms of the MIT license.
 
-Consulte o arquivo `LICENSE` para mais detalhes.
+See the `LICENSE` file for more details.
