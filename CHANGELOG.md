@@ -4,6 +4,12 @@ All notable changes to the "rn-shortcut" extension will be documented in this fi
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
+## [1.2.2] - 2026-10-03
+
+### Changed
+
+- README: new demo GIF for `rn-ctx`/`rn-fl` and redone GIFs for component and hook snippets.
+
 ## [1.2.1] - 2026-10-03
 
 ### Changed
