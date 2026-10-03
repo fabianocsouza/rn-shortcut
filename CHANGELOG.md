@@ -1,9 +1,24 @@
 # Change Log
 
-All notable changes to the "react-native-shortcut" extension will be documented in this file.
+All notable changes to the "rn-shortcut" extension will be documented in this file.
 
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
+The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
-## [Unreleased]
+## [1.1.0] - 2026-10-03
 
-- Initial release
+### Changed
+
+- `ust`, `od` and `cl` snippets now end with a semicolon and use consistent spacing.
+- `uef` snippet now has tab stops for the effect body and the dependency array.
+- Snippets are registered explicitly for JavaScript, JSX, TypeScript and TSX.
+- Updated `@vscode/vsce` to v4 and added `package`/`publish` scripts.
+- README: supported file types and local development instructions.
+- Added a CI workflow that packages the extension on every pull request.
+
+### Fixed
+
+- Indentation of `container` inside the `rn-s` StyleSheet.
+
+## [1.0.0]
+
+- Initial release.
