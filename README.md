@@ -51,6 +51,9 @@ List of available snippets. **⇥** means the `TAB` key.
 |     `rn-sc →` | Create a **React Native Component** with Styled Components |
 |  `rn-style →` | Create a **StyleSheet** file (`styles.ts`)                 |
 | `rn-styled →` | Create a **Styled Components** file (`styles.ts`)          |
+|  `rn-props →` | Create a **React Native Component** with typed `Props`     |
+|     `rn-fl →` | Create a **FlatList** with `keyExtractor` and `renderItem` |
+|    `rn-ctx →` | Create a **Context** with Provider and `useXxx()` hook     |
 
 ---
 
