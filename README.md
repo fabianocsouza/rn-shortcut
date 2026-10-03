@@ -17,6 +17,10 @@
 
 </br>
 
+<p align="center">
+  <img alt="rn-ctx and rn-fl snippets in action" width="100%" src=".github/demo.gif" />
+</p>
+
 <h1>
  <img alt="image1" width="100%" style="border-radius: 5%;" src=".github/image1.gif" title="image1"/>
 <img alt="image2" width="100%" style="border-radius: 5%;" src=".github/image2.gif" title="image2"/>
