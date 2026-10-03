@@ -12,6 +12,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 - `uef` snippet now has tab stops for the effect body and the dependency array.
 - Snippets are registered explicitly for JavaScript, JSX, TypeScript and TSX.
 - Updated `@vscode/vsce` to v4 and added `package`/`publish` scripts.
+- README: supported file types and local development instructions.
+- Added a CI workflow that packages the extension on every pull request.
 
 ### Fixed
 

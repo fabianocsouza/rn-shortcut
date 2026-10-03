@@ -24,14 +24,16 @@ This extension provides a set of snippets to help you create React Native compon
 
 ### Supported languages
 
-- JavaScript
-- TypeScript
+- JavaScript (`.js`)
+- JavaScript React (`.jsx`)
+- TypeScript (`.ts`)
+- TypeScript React (`.tsx`)
 
 ---
 
 ## Getting started
 
-Open any `.js` or `.ts` file in VS Code, type a snippet prefix and press `Tab`.
+Install **React Native Shortcut** from the VS Code Marketplace, open any `.js`, `.jsx`, `.ts` or `.tsx` file in VS Code, type a snippet prefix and press `Tab`.
 
 Example: type `rn` and press `Tab` to create a basic React Native component.
 
@@ -66,6 +68,16 @@ List of available snippets. **⇥** means the `TAB` key.
 ---
 
 ## Contribution
+
+To work on the extension locally (requires Node.js 22+):
+
+```bash
+npm install
+npm run package   # generates the .vsix file
+```
+
+Press `F5` in VS Code to open a window with the extension loaded.
+
 
 Any contribution you make will be **much appreciated**.
 
