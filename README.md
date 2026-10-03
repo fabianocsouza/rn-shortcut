@@ -10,9 +10,10 @@
 </h1>
 
 <p align="center">
-  <a href="https://marketplace.visualstudio.com/items?itemName=fabianocs.rn-shortcut"><img alt="VS Marketplace installs" src="https://img.shields.io/visual-studio-marketplace/i/fabianocs.rn-shortcut?label=installs"></a>
-  <a href="https://marketplace.visualstudio.com/items?itemName=fabianocs.rn-shortcut"><img alt="VS Marketplace version" src="https://img.shields.io/visual-studio-marketplace/v/fabianocs.rn-shortcut"></a>
+  <a href="https://marketplace.visualstudio.com/items?itemName=fabianocs.rn-shortcut"><img alt="VS Marketplace installs" src="https://vsmarketplacebadges.dev/installs-short/fabianocs.rn-shortcut.svg?label=installs"></a>
+  <a href="https://marketplace.visualstudio.com/items?itemName=fabianocs.rn-shortcut"><img alt="VS Marketplace version" src="https://vsmarketplacebadges.dev/version-short/fabianocs.rn-shortcut.svg?label=marketplace"></a>
   <a href="https://open-vsx.org/extension/fabianocs/rn-shortcut"><img alt="Open VSX" src="https://img.shields.io/open-vsx/v/fabianocs/rn-shortcut?label=open%20vsx"></a>
+  <a href="https://open-vsx.org/extension/fabianocs/rn-shortcut"><img alt="Open VSX downloads" src="https://img.shields.io/open-vsx/dt/fabianocs/rn-shortcut?label=open%20vsx%20downloads"></a>
 </p>
 
 </br>

@@ -4,6 +4,12 @@ All notable changes to the "rn-shortcut" extension will be documented in this fi
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
+## [1.2.4] - 2026-10-03
+
+### Fixed
+
+- README: replaced retired shields.io Marketplace badges; added Open VSX downloads badge.
+
 ## [1.2.3] - 2026-10-03
 
 ### Changed
