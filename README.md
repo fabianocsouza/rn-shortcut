@@ -18,15 +18,15 @@
 </br>
 
 <p align="center">
-  <img alt="rn-ctx and rn-fl snippets in action" width="100%" src=".github/demo.gif" />
+  <img alt="rn-ctx and rn-fl snippets in action" width="100%" src=".github/rns-demo.gif" />
 </p>
 
 <p align="center">
-  <img alt="Component snippets: rn, rn-s, rn-sc, rn-styled, rn-props" width="100%" src=".github/components.gif" />
+  <img alt="Component snippets: rn, rn-s, rn-sc, rn-styled, rn-props" width="100%" src=".github/rns-components.gif" />
 </p>
 
 <p align="center">
-  <img alt="Hook snippets: ust, uef, fn, cl" width="100%" src=".github/hooks.gif" />
+  <img alt="Hook snippets: ust, uef, fn, cl" width="100%" src=".github/rns-hooks.gif" />
 </p>
 
 </br>
