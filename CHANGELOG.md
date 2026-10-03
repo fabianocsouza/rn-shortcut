@@ -4,6 +4,14 @@ All notable changes to the "rn-shortcut" extension will be documented in this fi
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
+## [1.2.0] - 2026-10-03
+
+### Added
+
+- `rn-props`: component with typed `Props`.
+- `rn-fl`: `FlatList` with `keyExtractor` and `renderItem`.
+- `rn-ctx`: Context with Provider and custom hook.
+
 ## [1.1.0] - 2026-10-03
 
 ### Changed
