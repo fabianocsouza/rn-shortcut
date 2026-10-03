@@ -1,0 +1,62 @@
+name: Release
+
+# Publishes to the VS Code Marketplace and Open VSX whenever a new
+# version lands on main (i.e. "version" in package.json has no tag yet).
+on:
+  push:
+    branches: [main]
+    paths: [package.json]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check for a new version
+        id: version
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          if git rev-parse "v$VERSION" >/dev/null 2>&1; then
+            echo "Tag v$VERSION already exists, nothing to publish."
+            echo "new=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "new=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: actions/setup-node@v4
+        if: steps.version.outputs.new == 'true'
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Package
+        if: steps.version.outputs.new == 'true'
+        run: |
+          npm ci
+          npx vsce package --out rn-shortcut.vsix
+
+      - name: Publish to VS Code Marketplace
+        if: steps.version.outputs.new == 'true'
+        run: npx vsce publish --packagePath rn-shortcut.vsix --skip-duplicate
+        env:
+          VSCE_PAT: ${{ secrets.VSCE_PAT }}
+
+      - name: Publish to Open VSX
+        if: steps.version.outputs.new == 'true'
+        run: npx --yes ovsx publish rn-shortcut.vsix --skip-duplicate
+        env:
+          OVSX_PAT: ${{ secrets.OVSX_PAT }}
+
+      - name: Tag and create GitHub release
+        if: steps.version.outputs.new == 'true'
+        run: gh release create "v${{ steps.version.outputs.version }}" rn-shortcut.vsix --title "v${{ steps.version.outputs.version }}" --notes "See CHANGELOG.md" --target "$GITHUB_SHA"
+        env:
+          GH_TOKEN: ${{ github.token }}

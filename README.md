@@ -99,6 +99,8 @@ npm run publish:ovsx   # Open VSX (Cursor, Windsurf, VSCodium)
 
 Press `F5` in VS Code to open a window with the extension loaded.
 
+Releases are automatic: bump `version` in `package.json` (and the CHANGELOG), merge to `main`, and the **Release** workflow publishes to the VS Code Marketplace and Open VSX and creates a GitHub release.
+
 
 Any contribution you make will be **much appreciated**.
 
