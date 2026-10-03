@@ -26,7 +26,7 @@
       "}",
       "",
       "const styles = StyleSheet.create({",
-      "container: {},",
+      "  container: {},",
       "});",
     ],
     "description": "Component with inline StyleSheet.",
@@ -87,17 +87,17 @@
   },
   "Hook useState": {
     "prefix": "ust",
-    "body": ["const [ ${1:state}, ${2:setState} ] = useState(${3})"],
+    "body": ["const [${1:state}, ${2:setState}] = useState(${3});"],
     "description": "React useState hook.",
   },
   "Hook useEffect": {
     "prefix": "uef",
-    "body": ["useEffect(() => {}, []);"],
+    "body": ["useEffect(() => {", "  ${1}", "}, [${2}]);"],
     "description": "React useEffect hook.",
   },
   "Object Destructuring": {
     "prefix": "od",
-    "body": "const {${1:propertyName}} = ${2:objectToDestruct}",
+    "body": "const { ${1:propertyName} } = ${2:objectToDestruct};",
     "description": "Object destructuring assignment.",
   },
   "Basic Method": {
@@ -117,7 +117,7 @@
   },
   "Console Log": {
     "prefix": "cl",
-    "body": "console.log(${1:object})",
+    "body": "console.log(${1:object});",
     "description": "Log to the console.",
   },
 }
