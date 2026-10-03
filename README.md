@@ -9,6 +9,12 @@
   <img alt="React Native Shortcut" width="90%" title="React Native Shortcut" src="./assets/header.png" />
 </h1>
 
+<p align="center">
+  <a href="https://marketplace.visualstudio.com/items?itemName=fabianocs.rn-shortcut"><img alt="VS Marketplace installs" src="https://img.shields.io/visual-studio-marketplace/i/fabianocs.rn-shortcut?label=installs"></a>
+  <a href="https://marketplace.visualstudio.com/items?itemName=fabianocs.rn-shortcut"><img alt="VS Marketplace version" src="https://img.shields.io/visual-studio-marketplace/v/fabianocs.rn-shortcut"></a>
+  <a href="https://open-vsx.org/extension/fabianocs/rn-shortcut"><img alt="Open VSX" src="https://img.shields.io/open-vsx/v/fabianocs/rn-shortcut?label=open%20vsx"></a>
+</p>
+
 </br>
 
 <h1>
@@ -20,7 +26,9 @@
 
 ## About
 
-This extension provides a set of snippets to help you create React Native components faster.
+Snippets for **React Native** and **Expo** projects: components, StyleSheet, styled-components, hooks, `FlatList` and Context — in JavaScript and TypeScript.
+
+Works in **VS Code**, **Cursor**, **Windsurf** and **VSCodium** (via [Open VSX](https://open-vsx.org/extension/fabianocs/rn-shortcut)).
 
 ### Supported languages
 
@@ -76,7 +84,9 @@ To work on the extension locally (requires Node.js 22+):
 
 ```bash
 npm install
-npm run package   # generates the .vsix file
+npm run package        # generates the .vsix file
+npm run publish        # VS Code Marketplace
+npm run publish:ovsx   # Open VSX (Cursor, Windsurf, VSCodium)
 ```
 
 Press `F5` in VS Code to open a window with the extension loaded.

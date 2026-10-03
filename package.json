@@ -1,7 +1,7 @@
 {
   "name": "rn-shortcut",
-  "displayName": "React Native Shortcut",
-  "description": "Being productive by creating React Native components.",
+  "displayName": "React Native Snippets – TypeScript & Expo",
+  "description": "Snippets for React Native and Expo: components, StyleSheet, styled-components, hooks, FlatList and Context. JS/TS.",
   "publisher": "fabianocs",
   "author": {
     "name": "Fabiano C. Souza"
@@ -14,12 +14,22 @@
     "url": "git+https://github.com/fabianocsouza/rn-shortcut.git"
   },
   "keywords": [
-    "vscode",
-    "react",
     "react native",
+    "react-native",
+    "react native snippets",
+    "expo",
     "snippets",
-    "shortcut",
-    "components"
+    "typescript",
+    "tsx",
+    "javascript",
+    "react",
+    "hooks",
+    "flatlist",
+    "stylesheet",
+    "styled-components",
+    "context",
+    "components",
+    "shortcut"
   ],
   "engines": {
     "vscode": "^1.102.0"
@@ -52,6 +62,15 @@
   },
   "scripts": {
     "package": "vsce package",
-    "publish": "vsce publish"
+    "publish": "vsce publish",
+    "publish:ovsx": "npx --yes ovsx publish"
+  },
+  "galleryBanner": {
+    "color": "#20232A",
+    "theme": "dark"
+  },
+  "homepage": "https://github.com/fabianocsouza/rn-shortcut#readme",
+  "bugs": {
+    "url": "https://github.com/fabianocsouza/rn-shortcut/issues"
   }
 }
