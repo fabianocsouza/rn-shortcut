@@ -4,12 +4,15 @@ All notable changes to the "rn-shortcut" extension will be documented in this fi
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
-## [1.2.0] - 2026-10-03
+## [1.2.1] - 2026-10-03
 
 ### Changed
 
-- New display name, description and keywords for better Marketplace search.
-- Gallery banner, README badges and Open VSX publishing (`npm run publish:ovsx`).
+- Marketplace listing: new display name, description, keywords, gallery banner and README badges.
+- Icon resized to 256×256 (1.45 MB → 33 KB).
+- Added `npm run publish:ovsx` for Open VSX (Cursor, Windsurf, VSCodium).
+
+## [1.2.0] - 2026-10-03
 
 ### Added
 
