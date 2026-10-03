@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
 ## [1.2.0] - 2026-10-03
 
+### Changed
+
+- New display name, description and keywords for better Marketplace search.
+- Gallery banner, README badges and Open VSX publishing (`npm run publish:ovsx`).
+
 ### Added
 
 - `rn-props`: component with typed `Props`.
