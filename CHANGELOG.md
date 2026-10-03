@@ -12,6 +12,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 - `rn-fl`: `FlatList` with `keyExtractor` and `renderItem`.
 - `rn-ctx`: Context with Provider and custom hook.
 
+### Removed
+
+- Unused `assets/head.png` (2.6 MB smaller package).
+
 ## [1.1.0] - 2026-10-03
 
 ### Changed
