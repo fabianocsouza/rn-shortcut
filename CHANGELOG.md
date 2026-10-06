@@ -4,6 +4,16 @@ All notable changes to the "rn-shortcut" extension will be documented in this fi
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
+## [1.2.5] - 2026-10-06
+
+### Fixed
+
+- Snippets now only appear in JavaScript, JSX, TypeScript and TSX files instead of every language.
+
+### Added
+
+- Release workflow: merging a version bump to `main` publishes to the VS Code Marketplace and Open VSX and creates a GitHub release.
+
 ## [1.2.4] - 2026-10-03
 
 ### Fixed
