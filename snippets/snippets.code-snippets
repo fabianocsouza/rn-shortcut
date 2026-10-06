@@ -1,5 +1,6 @@
 {
   "React Native Component": {
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
     "prefix": "rn",
     "body": [
       "import { View } from 'react-native';",
@@ -13,6 +14,7 @@
     "description": "Create the structure of a React Native Component.",
   },
   "React Native StyleSheet Component": {
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
     "prefix": "rn-s",
     "body": [
       "import { View, StyleSheet } from 'react-native';",
@@ -32,6 +34,7 @@
     "description": "Component with inline StyleSheet.",
   },
   "React Native Import StyleSheet Component": {
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
     "prefix": "rn-si",
     "body": [
       "import { View } from 'react-native';",
@@ -49,6 +52,7 @@
     "description": "Component importing styles from ./styles.",
   },
   "React Native Styled Component": {
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
     "prefix": "rn-sc",
     "body": [
       "import { Container } from './styles';",
@@ -64,6 +68,7 @@
     "description": "Component using Styled Components.",
   },
   "React Native StyleSheet File": {
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
     "prefix": "rn-style",
     "body": [
       "import { StyleSheet } from 'react-native';",
@@ -75,6 +80,7 @@
     "description": "StyleSheet file for a React Native component.",
   },
   "React Native Styled Components File": {
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
     "prefix": "rn-styled",
     "body": [
       "import styled from 'styled-components/native';",
@@ -86,26 +92,31 @@
     "description": "Styled Components file for a React Native component.",
   },
   "Hook useState": {
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
     "prefix": "ust",
     "body": ["const [${1:state}, ${2:setState}] = useState(${3});"],
     "description": "React useState hook.",
   },
   "Hook useEffect": {
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
     "prefix": "uef",
     "body": ["useEffect(() => {", "  ${1}", "}, [${2}]);"],
     "description": "React useEffect hook.",
   },
   "Object Destructuring": {
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
     "prefix": "od",
     "body": "const { ${1:propertyName} } = ${2:objectToDestruct};",
     "description": "Object destructuring assignment.",
   },
   "Basic Method": {
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
     "prefix": "fn",
     "body": ["function ${1:methodName}(${2:params}) {", "  ${0}", "}", ""],
     "description": "Create a method structure.",
   },
   "Basic Method Async": {
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
     "prefix": "fn-async",
     "body": [
       "async function ${1:methodName}(${2:params}) {",
@@ -116,11 +127,13 @@
     "description": "Create an async function structure.",
   },
   "Console Log": {
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
     "prefix": "cl",
     "body": "console.log(${1:object});",
     "description": "Log to the console.",
   },
   "React Native Component with Props": {
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
     "prefix": "rn-props",
     "body": [
       "import { View } from 'react-native';",
@@ -140,6 +153,7 @@
     "description": "React Native Component with typed Props (TypeScript)."
   },
   "React Native FlatList": {
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
     "prefix": "rn-fl",
     "body": [
       "<FlatList",
@@ -153,6 +167,7 @@
     "description": "FlatList with data, keyExtractor and renderItem."
   },
   "React Context": {
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
     "prefix": "rn-ctx",
     "body": [
       "import { createContext, useContext, useState, type ReactNode } from 'react';",
