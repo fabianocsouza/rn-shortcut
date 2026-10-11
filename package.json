@@ -214,7 +214,7 @@
         "canBeReferencedInPrompt": true,
         "icon": "$(symbol-snippet)",
         "userDescription": "%tool.get.userDescription%",
-        "modelDescription": "ALWAYS call this tool before writing a React Native or Expo component, screen, context/provider, FlatList or hook in this project. It returns the project template for that kind of code, filled in with the names you pass. Use the returned code as the base and keep its structure, names and exports; only add what the user explicitly asked for. Prefixes: rn (component), rn-props (component with typed Props), rn-s / rn-si / rn-sc (component with StyleSheet or styled-components), rn-fl (FlatList), rn-ctx (Context + Provider + hook), ust / uef (useState / useEffect).",
+        "modelDescription": "ALWAYS call this tool before writing a React Native or Expo component, screen, context/provider, FlatList or hook in this project. It returns the project template for that kind of code, filled in with the names you pass. Use the returned code as the base and keep its structure, names and exports; only add what the user explicitly asked for. Prefixes: rn (component), rn-props (component with typed Props), rn-s / rn-si / rn-sc (component with StyleSheet or styled-components), rn-fl (FlatList), rn-ctx (Context + Provider + hook), ust / uef (useState / useEffect). Fill every placeholder in values so no default is left behind, e.g. rn-ctx for a cart: {\"1\": \"Cart\", \"2\": \"cart\", \"3\": \"CartItem[]\", \"4\": \"setCart\", \"5\": \"[]\"}.",
         "inputSchema": {
           "type": "object",
           "properties": {
@@ -245,7 +245,7 @@
             },
             "values": {
               "type": "object",
-              "description": "Placeholder values by number, e.g. {\"1\": \"Auth\", \"2\": \"user\"}. list_snippets shows what each number means.",
+              "description": "Placeholder values by number. rn-ctx: 1 = context name (Cart), 2 = value name (cart), 3 = value type (CartItem[]), 4 = setter name (setCart), 5 = initial value ([]). Other templates: see list_snippets.",
               "additionalProperties": {
                 "type": "string"
               }
