@@ -87,17 +87,21 @@ async function addAiRules() {
 // Native Copilot tools: declared in package.json (languageModelTools), so they
 // show up enabled in Copilot's tool list with no server to start or configure.
 // Cursor / Claude Code use the same answers through the MCP server (mcp/server.js).
-function registerCopilotTools(context) {
+function registerCopilotTools(context, log) {
   if (!vscode.lm || typeof vscode.lm.registerTool !== 'function') return false;
   const result = (text) => new vscode.LanguageModelToolResult([new vscode.LanguageModelTextPart(text)]);
   context.subscriptions.push(
     vscode.lm.registerTool('rnSnippets_listSnippets', {
       prepareInvocation: () => ({ invocationMessage: 'Listing React Native templates (list_snippets)' }),
-      invoke: () => result(listSnippetsText()),
+      invoke: () => {
+        log.appendLine(`${new Date().toLocaleTimeString()} Copilot called list_snippets`);
+        return result(listSnippetsText());
+      },
     }),
     vscode.lm.registerTool('rnSnippets_getSnippet', {
       prepareInvocation: (options) => ({ invocationMessage: `Getting the ${(options.input && options.input.prefix) || 'React Native'} template (get_snippet)` }),
       invoke: (options) => {
+        log.appendLine(`${new Date().toLocaleTimeString()} Copilot called get_snippet ${JSON.stringify(options.input)}`);
         try {
           return result(getSnippetText(options.input));
         } catch (err) {
@@ -209,7 +213,7 @@ function activate(context) {
     vscode.commands.registerCommand('rnSnippets.copyMcpConfig', copyMcpConfig),
   );
   try {
-    const tools = registerCopilotTools(context);
+    const tools = registerCopilotTools(context, log);
     log.appendLine(tools ? 'Activated: commands and Copilot tools registered.' : 'Activated: commands registered (this editor has no Copilot tools API).');
   } catch (err) {
     // The commands must keep working even if this editor's tools API differs.
