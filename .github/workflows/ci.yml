@@ -15,6 +15,10 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      - name: package-lock.json is in sync with package.json
+        run: |
+          npm install --package-lock-only --ignore-scripts
+          git diff --exit-code -- package-lock.json || (echo "Run 'npm install' and commit package-lock.json." && exit 1)
       - run: npm test
       - name: AI rules are up to date with the snippets
         run: |
