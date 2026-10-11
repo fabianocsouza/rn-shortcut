@@ -1,14 +1,14 @@
 {
   "name": "rn-shortcut",
-  "displayName": "React Native Snippets – TypeScript & Expo",
-  "description": "Snippets for React Native and Expo: components, StyleSheet, styled-components, hooks, FlatList and Context. JS/TS.",
+  "displayName": "%displayName%",
+  "description": "%description%",
   "publisher": "fabianocs",
   "author": {
     "name": "Fabiano C. Souza"
   },
   "icon": "assets/icon.png",
   "license": "MIT",
-  "version": "1.2.5",
+  "version": "1.3.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/fabianocsouza/rn-shortcut.git"
@@ -35,8 +35,23 @@
     "vscode": "^1.102.0"
   },
   "categories": [
-    "Snippets"
+    "Snippets",
+    "AI"
   ],
+  "main": "./extension.js",
+  "bin": {
+    "rn-snippets-mcp": "mcp/server.js"
+  },
+  "activationEvents": [
+    "onStartupFinished",
+    "onCommand:rnSnippets.addAiRules"
+  ],
+  "capabilities": {
+    "virtualWorkspaces": false,
+    "untrustedWorkspaces": {
+      "supported": true
+    }
+  },
   "contributes": {
     "snippets": [
       {
@@ -55,12 +70,200 @@
         "language": "typescriptreact",
         "path": "./snippets/snippets.code-snippets"
       }
+    ],
+    "commands": [
+      {
+        "command": "rnSnippets.addAiRules",
+        "title": "%cmd.addAiRules%",
+        "category": "React Native Snippets"
+      },
+      {
+        "command": "rnSnippets.getStarted",
+        "title": "%cmd.getStarted%",
+        "category": "React Native Snippets"
+      },
+      {
+        "command": "rnSnippets.tryIt",
+        "title": "%cmd.tryIt%",
+        "category": "React Native Snippets"
+      },
+      {
+        "command": "rnSnippets.copyMcpConfig",
+        "title": "%cmd.copyMcpConfig%",
+        "category": "React Native Snippets"
+      }
+    ],
+    "walkthroughs": [
+      {
+        "id": "rnSnippets.gettingStarted",
+        "title": "%wt.title%",
+        "icon": "assets/icon.png",
+        "description": "%wt.description%",
+        "steps": [
+          {
+            "id": "welcome",
+            "title": "%wt.welcome.title%",
+            "description": "%wt.welcome.description%",
+            "media": {
+              "image": {
+                "dark": "media/walkthrough/welcome-dark.webp",
+                "light": "media/walkthrough/welcome-light.webp",
+                "hc": "media/walkthrough/welcome-dark.webp",
+                "hcLight": "media/walkthrough/welcome-light.webp"
+              },
+              "altText": "%wt.welcome.alt%"
+            }
+          },
+          {
+            "id": "snippets",
+            "title": "%wt.snippets.title%",
+            "description": "%wt.snippets.description%",
+            "media": {
+              "image": {
+                "dark": "media/walkthrough/snippets-dark.webp",
+                "light": "media/walkthrough/snippets-light.webp",
+                "hc": "media/walkthrough/snippets-dark.webp",
+                "hcLight": "media/walkthrough/snippets-light.webp"
+              },
+              "altText": "%wt.snippets.alt%"
+            },
+            "completionEvents": [
+              "onCommand:rnSnippets.tryIt"
+            ]
+          },
+          {
+            "id": "boilerplate",
+            "title": "%wt.boilerplate.title%",
+            "description": "%wt.boilerplate.description%",
+            "media": {
+              "image": {
+                "dark": "media/walkthrough/boilerplate-dark.webp",
+                "light": "media/walkthrough/boilerplate-light.webp",
+                "hc": "media/walkthrough/boilerplate-dark.webp",
+                "hcLight": "media/walkthrough/boilerplate-light.webp"
+              },
+              "altText": "%wt.boilerplate.alt%"
+            }
+          },
+          {
+            "id": "aiRules",
+            "title": "%wt.aiRules.title%",
+            "description": "%wt.aiRules.description%",
+            "media": {
+              "image": {
+                "dark": "media/walkthrough/ai-rules-dark.webp",
+                "light": "media/walkthrough/ai-rules-light.webp",
+                "hc": "media/walkthrough/ai-rules-dark.webp",
+                "hcLight": "media/walkthrough/ai-rules-light.webp"
+              },
+              "altText": "%wt.aiRules.alt%"
+            },
+            "completionEvents": [
+              "onCommand:rnSnippets.addAiRules"
+            ]
+          },
+          {
+            "id": "copilot",
+            "title": "%wt.copilot.title%",
+            "description": "%wt.copilot.description%",
+            "media": {
+              "image": {
+                "dark": "media/walkthrough/copilot-dark.webp",
+                "light": "media/walkthrough/copilot-light.webp",
+                "hc": "media/walkthrough/copilot-dark.webp",
+                "hcLight": "media/walkthrough/copilot-light.webp"
+              },
+              "altText": "%wt.copilot.alt%"
+            }
+          },
+          {
+            "id": "rate",
+            "title": "%wt.rate.title%",
+            "description": "%wt.rate.description%",
+            "media": {
+              "image": {
+                "dark": "media/walkthrough/rate-dark.webp",
+                "light": "media/walkthrough/rate-light.webp",
+                "hc": "media/walkthrough/rate-dark.webp",
+                "hcLight": "media/walkthrough/rate-light.webp"
+              },
+              "altText": "%wt.rate.alt%"
+            }
+          }
+        ]
+      }
+    ],
+    "languageModelTools": [
+      {
+        "name": "rnSnippets_listSnippets",
+        "displayName": "%tool.list.displayName%",
+        "toolReferenceName": "rnSnippets",
+        "canBeReferencedInPrompt": true,
+        "icon": "$(list-unordered)",
+        "userDescription": "%tool.list.userDescription%",
+        "modelDescription": "Lists the React Native / Expo code templates this project uses (components, StyleSheet, styled-components, FlatList, Context, hooks). Call it when you are not sure which template fits, then call get_snippet.",
+        "inputSchema": {
+          "type": "object",
+          "properties": {}
+        }
+      },
+      {
+        "name": "rnSnippets_getSnippet",
+        "displayName": "%tool.get.displayName%",
+        "toolReferenceName": "rnSnippet",
+        "canBeReferencedInPrompt": true,
+        "icon": "$(symbol-snippet)",
+        "userDescription": "%tool.get.userDescription%",
+        "modelDescription": "ALWAYS call this tool before writing a React Native or Expo component, screen, context/provider, FlatList or hook in this project. It returns the project template for that kind of code, filled in with the names you pass. Use the returned code as the base and keep its structure, names and exports; only add what the user explicitly asked for. Prefixes: rn (component), rn-props (component with typed Props), rn-s / rn-si / rn-sc (component with StyleSheet or styled-components), rn-fl (FlatList), rn-ctx (Context + Provider + hook), ust / uef (useState / useEffect). Fill every placeholder in values so no default is left behind, e.g. rn-ctx for a cart: {\"1\": \"Cart\", \"2\": \"cart\", \"3\": \"CartItem[]\", \"4\": \"setCart\", \"5\": \"[]\"}.",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "prefix": {
+              "type": "string",
+              "description": "Template prefix from list_snippets, e.g. \"rn-ctx\" or \"rn-props\".",
+              "enum": [
+                "rn",
+                "rn-s",
+                "rn-si",
+                "rn-sc",
+                "rn-style",
+                "rn-styled",
+                "ust",
+                "uef",
+                "od",
+                "fn",
+                "fn-async",
+                "cl",
+                "rn-props",
+                "rn-fl",
+                "rn-ctx"
+              ]
+            },
+            "componentName": {
+              "type": "string",
+              "description": "Component name for component templates (defaults to \"ComponentName\")."
+            },
+            "values": {
+              "type": "object",
+              "description": "Placeholder values by number. rn-ctx: 1 = context name (Cart), 2 = value name (cart), 3 = value type (CartItem[]), 4 = setter name (setCart), 5 = initial value ([]). Other templates: see list_snippets.",
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "prefix"
+          ]
+        }
+      }
     ]
   },
   "devDependencies": {
     "@vscode/vsce": "^4.0.0"
   },
   "scripts": {
+    "test": "node --test test/*.test.js",
+    "build:ai-rules": "node scripts/build-ai-rules.js",
     "package": "vsce package",
     "publish": "vsce publish",
     "publish:ovsx": "npx --yes ovsx publish"

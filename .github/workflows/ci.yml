@@ -15,5 +15,13 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      - run: node -e "require('fs').readFileSync('snippets/snippets.code-snippets','utf8')"
+      - name: package-lock.json is in sync with package.json
+        run: |
+          npm install --package-lock-only --ignore-scripts
+          git diff --exit-code -- package-lock.json || (echo "Run 'npm install' and commit package-lock.json." && exit 1)
+      - run: npm test
+      - name: AI rules are up to date with the snippets
+        run: |
+          npm run build:ai-rules
+          git diff --exit-code -- ai-rules || (echo "Run 'npm run build:ai-rules' and commit the result." && exit 1)
       - run: npm run package

@@ -1,0 +1,201 @@
+<!-- rn-snippets:start -->
+# React Native code templates
+
+This project uses the React Native Snippets extension (fabianocs.rn-shortcut).
+When you write React Native / Expo code here, follow these templates so generated code matches what developers get from the snippets:
+
+- Before writing a component, screen, context, FlatList or hook, get the template from the React Native Snippets tool when it is available (`get_snippet`, or `#rnSnippet` in VS Code Copilot) and build on its result.
+- Keep the template structure and do not add state, props or features the user did not ask for.
+- Use named exports: `export function ComponentName()`, never default exports.
+- Name a component after its folder (`Home/index.tsx` exports `Home`).
+- Replace placeholder names (`ComponentName`, `Name`, `value`, `data`…) with names that fit the task.
+- Keep the structure: imports first, then types, then the component, then styles.
+- Use TypeScript types when the file is `.ts`/`.tsx`; drop them in `.js`/`.jsx` files.
+
+## Components
+
+### Create the structure of a React Native Component (snippet `rn`)
+
+```tsx
+import { View } from 'react-native';
+
+export function ComponentName() {
+  return (
+    <View></View>
+  );
+}
+```
+
+### Component with inline StyleSheet (snippet `rn-s`)
+
+```tsx
+import { View, StyleSheet } from 'react-native';
+
+export function ComponentName() {
+  return (
+    <View style={styles.container}>
+
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {},
+});
+```
+
+### Component importing styles from ./styles (snippet `rn-si`)
+
+```tsx
+import { View } from 'react-native';
+
+import { styles } from './styles';
+
+export function ComponentName() {
+  return (
+    <View style={styles.container}>
+
+    </View>
+  );
+}
+```
+
+### Component using Styled Components (snippet `rn-sc`)
+
+```tsx
+import { Container } from './styles';
+
+export function ComponentName() {
+  return (
+    <Container>
+
+    </Container>
+  );
+}
+```
+
+### React Native Component with typed Props (TypeScript) (snippet `rn-props`)
+
+```tsx
+import { View } from 'react-native';
+
+type Props = {
+  title: string;
+};
+
+export function ComponentName({ title }: Props) {
+  return (
+    <View>
+      
+    </View>
+  );
+}
+```
+
+## Style files
+
+### StyleSheet file for a React Native component (snippet `rn-style`)
+
+```tsx
+import { StyleSheet } from 'react-native';
+
+export const styles = StyleSheet.create({
+  container: {}
+});
+```
+
+### Styled Components file for a React Native component (snippet `rn-styled`)
+
+```tsx
+import styled from 'styled-components/native';
+
+export const Container = styled.View`
+  flex: 1;
+`;
+```
+
+## Lists and state
+
+### FlatList with data, keyExtractor and renderItem (snippet `rn-fl`)
+
+```tsx
+<FlatList
+  data={data}
+  keyExtractor={(item) => String(item.id)}
+  renderItem={({ item }) => (
+    
+  )}
+/>
+```
+
+### Context with Provider and custom hook (TypeScript) (snippet `rn-ctx`)
+
+```tsx
+import { createContext, useContext, useState, type ReactNode } from 'react';
+
+type NameContextData = {
+  value: string;
+  setValue: (value: string) => void;
+};
+
+const NameContext = createContext({} as NameContextData);
+
+export function NameProvider({ children }: { children: ReactNode }) {
+  const [value, setValue] = useState<string>('');
+
+  return (
+    <NameContext.Provider value={{ value, setValue }}>
+      {children}
+    </NameContext.Provider>
+  );
+}
+
+export function useName() {
+  return useContext(NameContext);
+}
+```
+
+## Hooks and helpers
+
+### React useState hook (snippet `ust`)
+
+```tsx
+const [state, setState] = useState();
+```
+
+### React useEffect hook (snippet `uef`)
+
+```tsx
+useEffect(() => {
+  
+}, []);
+```
+
+### Object destructuring assignment (snippet `od`)
+
+```tsx
+const { propertyName } = objectToDestruct;
+```
+
+### Create a method structure (snippet `fn`)
+
+```tsx
+function methodName(params) {
+  
+}
+```
+
+### Create an async function structure (snippet `fn-async`)
+
+```tsx
+async function methodName(params) {
+  
+}
+```
+
+### Log to the console (snippet `cl`)
+
+```tsx
+console.log(object);
+```
+<!-- rn-snippets:end -->
