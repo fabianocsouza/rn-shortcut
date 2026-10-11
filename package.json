@@ -42,7 +42,10 @@
   "bin": {
     "rn-snippets-mcp": "mcp/server.js"
   },
-  "activationEvents": [],
+  "activationEvents": [
+    "onStartupFinished",
+    "onCommand:rnSnippets.addAiRules"
+  ],
   "capabilities": {
     "virtualWorkspaces": false,
     "untrustedWorkspaces": {

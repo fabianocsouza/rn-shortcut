@@ -57,8 +57,15 @@ function registerMcpServer(context) {
 }
 
 function activate(context) {
-  context.subscriptions.push(vscode.commands.registerCommand('rnSnippets.addAiRules', addAiRules));
-  registerMcpServer(context);
+  const log = vscode.window.createOutputChannel('React Native Snippets');
+  context.subscriptions.push(log, vscode.commands.registerCommand('rnSnippets.addAiRules', addAiRules));
+  try {
+    registerMcpServer(context);
+    log.appendLine('Activated: command and MCP server registered.');
+  } catch (err) {
+    // The command must keep working even if this editor's MCP API differs.
+    log.appendLine(`Activated without MCP server: ${err && err.stack ? err.stack : err}`);
+  }
 }
 
 function deactivate() {}
