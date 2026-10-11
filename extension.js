@@ -114,6 +114,8 @@ function registerCopilotTools(context, log) {
   return true;
 }
 
+const WALKTHROUGH = 'fabianocs.rn-shortcut#rnSnippets.gettingStarted';
+
 const isPt = () => (vscode.env.language || '').toLowerCase().startsWith('pt');
 
 const PLAYGROUND = {

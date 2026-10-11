@@ -154,3 +154,55 @@ test('native Copilot tools are declared in package.json and match the shared ans
   assert.match(listSnippetsText(), /- rn-ctx: /);
   assert.match(getSnippetText({ prefix: 'rn-ctx', values: { 1: 'Auth' } }), /export function useAuth\(\)/);
 });
+
+test('extension activates and every command runs against a stubbed VS Code', async () => {
+  const fs = require('fs');
+  const os = require('os');
+  const path = require('path');
+  const Module = require('module');
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'rn-ext-'));
+  fs.writeFileSync(path.join(root, 'package.json'), JSON.stringify({ dependencies: { expo: '55' } }));
+  const commands = {};
+  const executed = [];
+  const tools = {};
+  class Part { constructor(v) { this.value = v; } }
+  class Result { constructor(c) { this.content = c; } }
+  const vscode = {
+    env: { language: 'pt-br', clipboard: { writeText: async () => {} } },
+    Position: class {}, Selection: class {}, LanguageModelTextPart: Part, LanguageModelToolResult: Result,
+    lm: { registerTool: (name, impl) => { tools[name] = impl; return { dispose() {} }; } },
+    workspace: { workspaceFolders: [{ uri: { fsPath: root } }], openTextDocument: async (o) => o },
+    window: {
+      createOutputChannel: () => ({ appendLine() {}, dispose() {} }),
+      showInformationMessage: async () => undefined, showWarningMessage: async () => undefined,
+      showErrorMessage: async (m) => { throw new Error(m); },
+      showQuickPick: async (items) => items.filter ? items.filter((i) => i.picked) : undefined,
+      showTextDocument: async () => ({}), showWorkspaceFolderPick: async () => undefined,
+    },
+    commands: {
+      registerCommand: (id, fn) => { commands[id] = fn; return { dispose() {} }; },
+      executeCommand: async (id) => { executed.push(id); },
+    },
+    Uri: { file: (f) => f },
+  };
+  const store = () => { const m = {}; return { get: (k) => m[k], update: async (k, v) => { m[k] = v; } }; };
+  const load = Module._load;
+  Module._load = function (request, ...rest) { return request === 'vscode' ? vscode : load.call(this, request, ...rest); };
+  try {
+    delete require.cache[require.resolve('../extension.js')];
+    const ext = require('../extension.js');
+    ext.activate({ subscriptions: [], extensionPath: path.join(__dirname, '..'), globalState: store(), workspaceState: store() });
+    await new Promise((r) => setTimeout(r, 20));
+    const pkg = require('../package.json');
+    for (const { command } of pkg.contributes.commands) {
+      assert.ok(commands[command], `${command} is registered`);
+      await commands[command]();
+    }
+    assert.ok(executed.includes('workbench.action.openWalkthrough'));
+    assert.ok(fs.existsSync(path.join(root, 'AGENTS.md')), 'Add AI rules wrote files');
+    for (const t of pkg.contributes.languageModelTools) assert.ok(tools[t.name], `${t.name} is registered`);
+  } finally {
+    Module._load = load;
+    fs.rmSync(root, { recursive: true });
+  }
+});
