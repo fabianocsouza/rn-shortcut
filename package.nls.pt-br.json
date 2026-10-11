@@ -5,7 +5,7 @@
   "cmd.getStarted": "Primeiros passos",
   "cmd.tryIt": "Testar os snippets",
   "cmd.copyMcpConfig": "Copiar configuração do MCP para Cursor / Claude Code",
-  "wt.title": "⚡ React Native Snippets",
+  "wt.title": "React Native Snippets",
   "wt.description": "Snippets para React Native e Expo — e a sua IA seguindo os mesmos modelos.",
   "wt.welcome.title": "👋 Boas-vindas ao React Native Snippets",
   "wt.welcome.description": "Digite um atalho curto, aperte Tab e receba o código React Native que você escreve todo dia. Seu assistente de IA também pode seguir os mesmos modelos.",

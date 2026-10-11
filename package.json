@@ -103,6 +103,7 @@
       {
         "id": "rnSnippets.gettingStarted",
         "title": "%wt.title%",
+        "icon": "assets/icon.png",
         "description": "%wt.description%",
         "steps": [
           {
