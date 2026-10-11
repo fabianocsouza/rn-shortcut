@@ -115,11 +115,12 @@ The files are meant to be **committed**, so your team and cloud agents (Copilot 
 
 If the target file already exists, paste the content at the end of it.
 
-### MCP server (AI asks the extension for the templates)
+### AI asks the extension for the templates
 
-The extension also ships an [MCP](https://modelcontextprotocol.io) server with two tools, `list_snippets` and `get_snippet`, so assistants can fetch a template filled in with their own names (e.g. `rn-ctx` with `Auth`/`user`).
+Assistants can fetch a template filled in with their own names (e.g. `rn-ctx` with `Auth`/`user`) through two tools, `list_snippets` and `get_snippet`.
 
-- **VS Code + Copilot:** nothing to set up. With the extension installed, **React Native Snippets** shows up in Copilot's tool list (agent mode).
+- **VS Code + Copilot:** nothing to set up. The extension adds the tools to Copilot directly, so **React Native Snippets** shows up **enabled** in Copilot's tool list (agent mode). You can also mention them in a prompt with `#rnSnippet` / `#rnSnippets`. The first time Copilot uses them it may ask for permission; pick **Always Allow** in the menu next to **Allow** to stop the prompt.
+- **Cursor, Claude Code and other MCP clients:** the extension also ships an [MCP](https://modelcontextprotocol.io) server with the same tools (Node.js 18+). Run **React Native Snippets: Copy MCP setup** from the Command Palette, or use:
 - **Claude Code:**
   ```bash
   claude mcp add rn-snippets -- npx -y github:fabianocsouza/rn-shortcut
@@ -132,7 +133,6 @@ The extension also ships an [MCP](https://modelcontextprotocol.io) server with t
     }
   }
   ```
-  Requires Node.js 18+.
 
 ---
 

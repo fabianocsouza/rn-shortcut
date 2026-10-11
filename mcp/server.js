@@ -5,57 +5,25 @@
 // React Native snippets to AI assistants. No dependencies on purpose.
 
 const readline = require('readline');
-const { loadSnippets, renderSnippet, tabStops, usesComponentName } = require('../lib/snippets');
+const { listSnippetsText, getSnippetText, UnknownSnippetError, DESCRIPTIONS, GET_SCHEMA } = require('../lib/tools');
 const { version } = require('../package.json');
 
 const SUPPORTED_PROTOCOLS = ['2025-06-18', '2025-03-26', '2024-11-05'];
-const snippets = loadSnippets();
 
 const TOOLS = [
-  {
-    name: 'list_snippets',
-    description:
-      'List the React Native / Expo code templates used in this project (components, StyleSheet, styled-components, FlatList, Context, hooks). ' +
-      'Call this before creating React Native code to see which template fits.',
-    inputSchema: { type: 'object', properties: {} },
-  },
-  {
-    name: 'get_snippet',
-    description:
-      'Return the code for one React Native template, filled in with your names. Use it as the starting point when creating a component, ' +
-      'context, FlatList or hook so the code follows the project conventions.',
-    inputSchema: {
-      type: 'object',
-      properties: {
-        prefix: { type: 'string', description: 'Template prefix from list_snippets, e.g. "rn-ctx" or "rn-props".', enum: snippets.map((s) => s.prefix) },
-        componentName: { type: 'string', description: 'Component name for component templates (defaults to "ComponentName").' },
-        values: {
-          type: 'object',
-          description: 'Placeholder values by number, e.g. {"1": "Auth", "2": "user"}. list_snippets shows what each number means.',
-          additionalProperties: { type: 'string' },
-        },
-      },
-      required: ['prefix'],
-    },
-  },
+  { name: 'list_snippets', description: DESCRIPTIONS.list, inputSchema: { type: 'object', properties: {} } },
+  { name: 'get_snippet', description: DESCRIPTIONS.get, inputSchema: GET_SCHEMA },
 ];
 
-function listSnippets() {
-  return snippets
-    .map((s) => {
-      const parts = Object.entries(tabStops(s.body)).map(([n, d]) => `${n}=${d || '…'}`);
-      if (usesComponentName(s.body)) parts.unshift('componentName');
-      return `- ${s.prefix}: ${s.description}${parts.length ? ` (placeholders: ${parts.join(', ')})` : ''}`;
-    })
-    .join('\n');
-}
-
 function callTool(name, args = {}) {
-  if (name === 'list_snippets') return listSnippets();
+  if (name === 'list_snippets') return listSnippetsText();
   if (name === 'get_snippet') {
-    const s = snippets.find((x) => x.prefix === args.prefix);
-    if (!s) throw new RpcError(-32602, `Unknown snippet "${args.prefix}". Call list_snippets to see the available prefixes.`);
-    return renderSnippet(s.body, { ...(args.values || {}), componentName: args.componentName });
+    try {
+      return getSnippetText(args);
+    } catch (err) {
+      if (err instanceof UnknownSnippetError) throw new RpcError(-32602, err.message);
+      throw err;
+    }
   }
   throw new RpcError(-32602, `Unknown tool "${name}"`);
 }

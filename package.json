@@ -93,12 +93,6 @@
         "category": "React Native Snippets"
       }
     ],
-    "mcpServerDefinitionProviders": [
-      {
-        "id": "rnSnippets.mcp",
-        "label": "React Native Snippets"
-      }
-    ],
     "walkthroughs": [
       {
         "id": "rnSnippets.gettingStarted",
@@ -197,6 +191,70 @@
             }
           }
         ]
+      }
+    ],
+    "languageModelTools": [
+      {
+        "name": "rnSnippets_listSnippets",
+        "displayName": "%tool.list.displayName%",
+        "toolReferenceName": "rnSnippets",
+        "canBeReferencedInPrompt": true,
+        "icon": "$(list-unordered)",
+        "userDescription": "%tool.list.userDescription%",
+        "modelDescription": "List the React Native / Expo code templates used in this project (components, StyleSheet, styled-components, FlatList, Context, hooks). Call this before creating React Native code to see which template fits.",
+        "inputSchema": {
+          "type": "object",
+          "properties": {}
+        }
+      },
+      {
+        "name": "rnSnippets_getSnippet",
+        "displayName": "%tool.get.displayName%",
+        "toolReferenceName": "rnSnippet",
+        "canBeReferencedInPrompt": true,
+        "icon": "$(symbol-snippet)",
+        "userDescription": "%tool.get.userDescription%",
+        "modelDescription": "Return the code for one React Native template, filled in with your names. Use it as the starting point when creating a component, context, FlatList or hook so the code follows the project conventions.",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "prefix": {
+              "type": "string",
+              "description": "Template prefix from list_snippets, e.g. \"rn-ctx\" or \"rn-props\".",
+              "enum": [
+                "rn",
+                "rn-s",
+                "rn-si",
+                "rn-sc",
+                "rn-style",
+                "rn-styled",
+                "ust",
+                "uef",
+                "od",
+                "fn",
+                "fn-async",
+                "cl",
+                "rn-props",
+                "rn-fl",
+                "rn-ctx"
+              ]
+            },
+            "componentName": {
+              "type": "string",
+              "description": "Component name for component templates (defaults to \"ComponentName\")."
+            },
+            "values": {
+              "type": "object",
+              "description": "Placeholder values by number, e.g. {\"1\": \"Auth\", \"2\": \"user\"}. list_snippets shows what each number means.",
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "prefix"
+          ]
+        }
       }
     ]
   },

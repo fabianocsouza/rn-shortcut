@@ -20,9 +20,13 @@
   "wt.aiRules.description": "Write instruction files that Copilot, Cursor and Claude Code read. Existing files keep their content. You can keep them on this machine only.\n[Add AI rules](command:rnSnippets.addAiRules)",
   "wt.aiRules.alt": "Project tree with AGENTS.md, CLAUDE.md, a Cursor rule and Copilot instructions",
   "wt.copilot.title": "💬 Copilot fetches the templates",
-  "wt.copilot.description": "The built-in MCP server lets Copilot agent mode call get_snippet, with no setup. Using Cursor or Claude Code? Copy the one-line setup.\n[Open Chat](command:workbench.action.chat.open)\n[Copy MCP setup](command:rnSnippets.copyMcpConfig)",
+  "wt.copilot.description": "Copilot gets the templates through built-in tools, enabled by default with no setup. Using Cursor or Claude Code? Copy the one-line MCP setup.\n[Open Chat](command:workbench.action.chat.open)\n[Copy MCP setup](command:rnSnippets.copyMcpConfig)",
   "wt.copilot.alt": "Copilot chat calling list_snippets and get_snippet and generating an AuthProvider",
   "wt.rate.title": "⭐ Enjoying it? Leave a star",
   "wt.rate.description": "A rating or a star helps other React Native developers find the extension.\n[Rate on the Marketplace](https://marketplace.visualstudio.com/items?itemName=fabianocs.rn-shortcut&ssr=false#review-details)\n[Star on GitHub](https://github.com/fabianocsouza/rn-shortcut)",
-  "wt.rate.alt": "Five stars next to the React Native Snippets icon"
+  "wt.rate.alt": "Five stars next to the React Native Snippets icon",
+  "tool.list.displayName": "List React Native templates",
+  "tool.list.userDescription": "Lists the React Native Snippets templates (components, FlatList, Context, hooks).",
+  "tool.get.displayName": "Get a React Native template",
+  "tool.get.userDescription": "Returns a React Native Snippets template filled in with your names."
 }

@@ -20,9 +20,13 @@
   "wt.aiRules.description": "Cria os arquivos de instruções que o Copilot, o Cursor e o Claude Code leem. Arquivos que já existem mantêm o seu conteúdo. Se preferir, dá para mantê-los só nesta máquina.\n[Adicionar regras de IA](command:rnSnippets.addAiRules)",
   "wt.aiRules.alt": "Árvore do projeto com AGENTS.md, CLAUDE.md, regra do Cursor e instruções do Copilot",
   "wt.copilot.title": "💬 O Copilot busca os modelos sozinho",
-  "wt.copilot.description": "O servidor MCP incluído deixa o Copilot, no modo agente, chamar o get_snippet, sem configurar nada. Usa Cursor ou Claude Code? Copie a configuração de uma linha.\n[Abrir o chat](command:workbench.action.chat.open)\n[Copiar configuração do MCP](command:rnSnippets.copyMcpConfig)",
+  "wt.copilot.description": "O Copilot recebe os modelos por ferramentas incluídas na extensão, já ativadas e sem configurar nada. Usa Cursor ou Claude Code? Copie a configuração do MCP de uma linha.\n[Abrir o chat](command:workbench.action.chat.open)\n[Copiar configuração do MCP](command:rnSnippets.copyMcpConfig)",
   "wt.copilot.alt": "Chat do Copilot chamando list_snippets e get_snippet e gerando um AuthProvider",
   "wt.rate.title": "⭐ Gostou? Deixe uma estrela",
   "wt.rate.description": "Uma avaliação ou uma estrela ajuda outros devs React Native a encontrar a extensão.\n[Avaliar no Marketplace](https://marketplace.visualstudio.com/items?itemName=fabianocs.rn-shortcut&ssr=false#review-details)\n[Dar estrela no GitHub](https://github.com/fabianocsouza/rn-shortcut)",
-  "wt.rate.alt": "Cinco estrelas ao lado do ícone do React Native Snippets"
+  "wt.rate.alt": "Cinco estrelas ao lado do ícone do React Native Snippets",
+  "tool.list.displayName": "Listar modelos React Native",
+  "tool.list.userDescription": "Lista os modelos do React Native Snippets (componentes, FlatList, Context, hooks).",
+  "tool.get.displayName": "Obter um modelo React Native",
+  "tool.get.userDescription": "Devolve um modelo do React Native Snippets preenchido com os seus nomes."
 }

@@ -1,10 +1,10 @@
 'use strict';
 
-const path = require('path');
 const vscode = require('vscode');
 const { installRules, TARGETS } = require('./lib/install');
 const { isReactNativeProject, hasAiRules } = require('./lib/detect');
 const { findGitDir, excludeLocally } = require('./lib/gitexclude');
+const { listSnippetsText, getSnippetText, UnknownSnippetError } = require('./lib/tools');
 
 const DEFAULT_TARGETS = ['agents', 'cursor', 'copilot'];
 
@@ -84,23 +84,31 @@ async function addAiRules() {
   }
 }
 
-// Lets Copilot (agent mode) in VS Code use the snippets through MCP without any
-// setup. The server runs on VS Code's own runtime (ELECTRON_RUN_AS_NODE), so
-// Node.js doesn't need to be installed. Editors without this API skip it.
-function registerMcpServer(context) {
-  if (!vscode.lm || typeof vscode.lm.registerMcpServerDefinitionProvider !== 'function' || !vscode.McpStdioServerDefinition) return;
-  const server = path.join(context.extensionPath, 'mcp', 'server.js');
-  const version = context.extension && context.extension.packageJSON ? context.extension.packageJSON.version : undefined;
+// Native Copilot tools: declared in package.json (languageModelTools), so they
+// show up enabled in Copilot's tool list with no server to start or configure.
+// Cursor / Claude Code use the same answers through the MCP server (mcp/server.js).
+function registerCopilotTools(context) {
+  if (!vscode.lm || typeof vscode.lm.registerTool !== 'function') return false;
+  const result = (text) => new vscode.LanguageModelToolResult([new vscode.LanguageModelTextPart(text)]);
   context.subscriptions.push(
-    vscode.lm.registerMcpServerDefinitionProvider('rnSnippets.mcp', {
-      provideMcpServerDefinitions: () => [
-        new vscode.McpStdioServerDefinition('React Native Snippets', process.execPath, [server], { ELECTRON_RUN_AS_NODE: '1' }, version),
-      ],
+    vscode.lm.registerTool('rnSnippets_listSnippets', {
+      prepareInvocation: () => ({ invocationMessage: 'Listing React Native templates (list_snippets)' }),
+      invoke: () => result(listSnippetsText()),
+    }),
+    vscode.lm.registerTool('rnSnippets_getSnippet', {
+      prepareInvocation: (options) => ({ invocationMessage: `Getting the ${(options.input && options.input.prefix) || 'React Native'} template (get_snippet)` }),
+      invoke: (options) => {
+        try {
+          return result(getSnippetText(options.input));
+        } catch (err) {
+          if (err instanceof UnknownSnippetError) return result(err.message);
+          throw err;
+        }
+      },
     }),
   );
+  return true;
 }
-
-const WALKTHROUGH = 'fabianocs.rn-shortcut#rnSnippets.gettingStarted';
 
 const isPt = () => (vscode.env.language || '').toLowerCase().startsWith('pt');
 
@@ -201,11 +209,11 @@ function activate(context) {
     vscode.commands.registerCommand('rnSnippets.copyMcpConfig', copyMcpConfig),
   );
   try {
-    registerMcpServer(context);
-    log.appendLine('Activated: command and MCP server registered.');
+    const tools = registerCopilotTools(context);
+    log.appendLine(tools ? 'Activated: commands and Copilot tools registered.' : 'Activated: commands registered (this editor has no Copilot tools API).');
   } catch (err) {
-    // The command must keep working even if this editor's MCP API differs.
-    log.appendLine(`Activated without MCP server: ${err && err.stack ? err.stack : err}`);
+    // The commands must keep working even if this editor's tools API differs.
+    log.appendLine(`Activated without Copilot tools: ${err && err.stack ? err.stack : err}`);
   }
   suggestAiRules(context).catch((err) => log.appendLine(`AI rules suggestion failed: ${err && err.stack ? err.stack : err}`));
 }

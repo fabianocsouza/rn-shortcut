@@ -140,3 +140,14 @@ test('excludeLocally hides only the given files, once, and follows .git files', 
   fs.rmSync(root, { recursive: true });
   fs.rmSync(wt, { recursive: true });
 });
+
+test('native Copilot tools are declared in package.json and match the shared answers', () => {
+  const pkg = require('../package.json');
+  const { getSnippetText, listSnippetsText, GET_SCHEMA } = require('../lib/tools');
+  const names = pkg.contributes.languageModelTools.map((t) => t.name);
+  assert.deepStrictEqual(names, ['rnSnippets_listSnippets', 'rnSnippets_getSnippet']);
+  assert.deepStrictEqual(pkg.contributes.languageModelTools[1].inputSchema, GET_SCHEMA, 'schema in package.json is up to date');
+  assert.strictEqual(pkg.contributes.mcpServerDefinitionProviders, undefined, 'no duplicate MCP tools in VS Code');
+  assert.match(listSnippetsText(), /- rn-ctx: /);
+  assert.match(getSnippetText({ prefix: 'rn-ctx', values: { 1: 'Auth' } }), /export function useAuth\(\)/);
+});
