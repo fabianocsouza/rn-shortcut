@@ -1,5 +1,6 @@
 'use strict';
 
+const path = require('path');
 const vscode = require('vscode');
 const { installRules, TARGETS } = require('./lib/install');
 
@@ -39,8 +40,25 @@ async function addAiRules() {
   }
 }
 
+// Lets Copilot (agent mode) in VS Code use the snippets through MCP without any
+// setup. The server runs on VS Code's own runtime (ELECTRON_RUN_AS_NODE), so
+// Node.js doesn't need to be installed. Editors without this API skip it.
+function registerMcpServer(context) {
+  if (!vscode.lm || typeof vscode.lm.registerMcpServerDefinitionProvider !== 'function' || !vscode.McpStdioServerDefinition) return;
+  const server = path.join(context.extensionPath, 'mcp', 'server.js');
+  const version = context.extension && context.extension.packageJSON ? context.extension.packageJSON.version : undefined;
+  context.subscriptions.push(
+    vscode.lm.registerMcpServerDefinitionProvider('rnSnippets.mcp', {
+      provideMcpServerDefinitions: () => [
+        new vscode.McpStdioServerDefinition('React Native Snippets', process.execPath, [server], { ELECTRON_RUN_AS_NODE: '1' }, version),
+      ],
+    }),
+  );
+}
+
 function activate(context) {
   context.subscriptions.push(vscode.commands.registerCommand('rnSnippets.addAiRules', addAiRules));
+  registerMcpServer(context);
 }
 
 function deactivate() {}

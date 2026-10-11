@@ -4,6 +4,15 @@ All notable changes to the "rn-shortcut" extension will be documented in this fi
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
+## [1.3.0] - 2026-10-11
+
+### Added
+
+- **AI rules:** `ai-rules/` has the snippet templates as instruction files for Cursor, GitHub Copilot, Claude Code and `AGENTS.md`, so AI-generated code follows the same patterns.
+- **Command "React Native Snippets: Add AI rules to project":** writes those files into the open project; existing files keep their content and re-running updates the section in place.
+- **MCP server** with `list_snippets` and `get_snippet`: registered automatically for Copilot in VS Code, and runnable with `npx -y github:fabianocsouza/rn-shortcut` for Claude Code, Cursor and other clients.
+- Unit tests (`npm test`) run in CI.
+
 ## [1.2.5] - 2026-10-06
 
 ### Fixed

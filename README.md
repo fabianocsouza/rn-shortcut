@@ -103,6 +103,25 @@ AI assistants don't trigger snippets, but they do read instruction files in your
 
 If the target file already exists, paste the content at the end of it.
 
+### MCP server (AI asks the extension for the templates)
+
+The extension also ships an [MCP](https://modelcontextprotocol.io) server with two tools, `list_snippets` and `get_snippet`, so assistants can fetch a template filled in with their own names (e.g. `rn-ctx` with `Auth`/`user`).
+
+- **VS Code + Copilot:** nothing to set up. With the extension installed, **React Native Snippets** shows up in Copilot's tool list (agent mode).
+- **Claude Code:**
+  ```bash
+  claude mcp add rn-snippets -- npx -y github:fabianocsouza/rn-shortcut
+  ```
+- **Cursor** (`.cursor/mcp.json`) and other MCP clients:
+  ```json
+  {
+    "mcpServers": {
+      "rn-snippets": { "command": "npx", "args": ["-y", "github:fabianocsouza/rn-shortcut"] }
+    }
+  }
+  ```
+  Requires Node.js 18+.
+
 ---
 
 ## Contribution

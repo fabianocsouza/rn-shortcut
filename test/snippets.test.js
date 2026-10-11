@@ -69,3 +69,31 @@ test('installRules creates, merges and is idempotent', () => {
   assert.deepStrictEqual(second.map((r) => r.action), ['unchanged', 'unchanged', 'unchanged']);
   fs.rmSync(root, { recursive: true });
 });
+
+test('tabStops ignores folder-name and mirrored transforms', () => {
+  assert.deepStrictEqual(tabStops(get('rn').body), {});
+  assert.deepStrictEqual(tabStops(get('rn-ctx').body), { 1: 'Name', 2: 'value', 3: 'string', 4: "''" });
+});
+
+test('MCP server answers initialize, tools/list and tools/call', async () => {
+  const { spawn } = require('child_process');
+  const path = require('path');
+  const child = spawn(process.execPath, [path.join(__dirname, '..', 'mcp', 'server.js')]);
+  const lines = [];
+  child.stdout.on('data', (d) => lines.push(...d.toString().split('\n').filter(Boolean)));
+  const send = (m) => child.stdin.write(JSON.stringify(m) + '\n');
+  send({ jsonrpc: '2.0', id: 1, method: 'initialize', params: { protocolVersion: '2025-06-18', capabilities: {}, clientInfo: { name: 'test', version: '1' } } });
+  send({ jsonrpc: '2.0', method: 'notifications/initialized' });
+  send({ jsonrpc: '2.0', id: 2, method: 'tools/list' });
+  send({ jsonrpc: '2.0', id: 3, method: 'tools/call', params: { name: 'get_snippet', arguments: { prefix: 'rn-props', componentName: 'Header' } } });
+  send({ jsonrpc: '2.0', id: 4, method: 'tools/call', params: { name: 'get_snippet', arguments: { prefix: 'missing' } } });
+  child.stdin.end();
+  await new Promise((r) => child.on('close', r));
+
+  const res = Object.fromEntries(lines.map((l) => JSON.parse(l)).map((m) => [m.id, m]));
+  assert.strictEqual(Object.keys(res).length, 4, 'notifications get no reply');
+  assert.strictEqual(res[1].result.protocolVersion, '2025-06-18');
+  assert.deepStrictEqual(res[2].result.tools.map((t) => t.name), ['list_snippets', 'get_snippet']);
+  assert.match(res[3].result.content[0].text, /export function Header\(\{ title \}: Props\)/);
+  assert.strictEqual(res[4].result.isError, true);
+});
