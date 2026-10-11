@@ -119,7 +119,7 @@ If the target file already exists, paste the content at the end of it.
 
 Assistants can fetch a template filled in with their own names (e.g. `rn-ctx` with `Auth`/`user`) through two tools, `list_snippets` and `get_snippet`.
 
-- **VS Code + Copilot:** nothing to set up. The extension adds the tools to Copilot directly, so **React Native Snippets** shows up **enabled** in Copilot's tool list (agent mode). You can also mention them in a prompt with `#rnSnippet` / `#rnSnippets`. The first time Copilot uses them it may ask for permission; pick **Always Allow** in the menu next to **Allow** to stop the prompt.
+- **VS Code + Copilot:** nothing to set up. The extension adds the tools to Copilot directly, so **React Native Snippets** shows up **enabled** in Copilot's tool list (agent mode). You can also mention them in a prompt with `#rnSnippet` / `#rnSnippets`. The first time Copilot uses them it may ask for permission; pick **Always Allow** in the menu next to **Allow** to stop the prompt. The model decides when to call a tool; to get the exact template every time, name it in your prompt, e.g. *"Use #rnSnippet rn-ctx to create an auth context"*.
 - **Cursor, Claude Code and other MCP clients:** the extension also ships an [MCP](https://modelcontextprotocol.io) server with the same tools (Node.js 18+). Run **React Native Snippets: Copy MCP setup** from the Command Palette, or use:
 - **Claude Code:**
   ```bash
