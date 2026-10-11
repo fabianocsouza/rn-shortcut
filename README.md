@@ -90,7 +90,7 @@ List of available snippets. **⇥** means the `TAB` key.
 
 AI assistants don't trigger snippets, but they do read instruction files in your project. This extension can write those files for you, with the same templates as the snippets, so AI-generated code follows the same patterns.
 
-**From the editor:** open the Command Palette (`Cmd/Ctrl+Shift+P`) and run **React Native Snippets: Add AI rules to project**. Pick your tools and the files are created, or updated in place if they already exist (your own content is kept).
+**From the editor:** when you open a React Native or Expo project, the extension offers to add them (one click). You can also open the Command Palette (`Cmd/Ctrl+Shift+P`) and run **React Native Snippets: Add AI rules to project**. Pick your tools and the files are created, or updated in place if they already exist (your own content is kept). **React Native Snippets: Get Started** opens a short walkthrough.
 
 **By hand:** copy the file for your tool from [`ai-rules/`](ai-rules):
 

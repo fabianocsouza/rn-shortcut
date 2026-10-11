@@ -97,3 +97,22 @@ test('MCP server answers initialize, tools/list and tools/call', async () => {
   assert.match(res[3].result.content[0].text, /export function Header\(\{ title \}: Props\)/);
   assert.strictEqual(res[4].result.isError, true);
 });
+
+test('detects React Native projects and existing AI rules', () => {
+  const fs = require('fs');
+  const os = require('os');
+  const path = require('path');
+  const { isReactNativeProject, hasAiRules } = require('../lib/detect');
+  const { installRules } = require('../lib/install');
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'rn-detect-'));
+  assert.strictEqual(isReactNativeProject(root), false, 'no package.json');
+  fs.writeFileSync(path.join(root, 'package.json'), JSON.stringify({ dependencies: { react: '19' } }));
+  assert.strictEqual(isReactNativeProject(root), false);
+  fs.writeFileSync(path.join(root, 'package.json'), JSON.stringify({ dependencies: { expo: '~55.0.0' } }));
+  assert.strictEqual(isReactNativeProject(root), true);
+  fs.writeFileSync(path.join(root, 'AGENTS.md'), '# Team rules\n');
+  assert.strictEqual(hasAiRules(root), false, 'AGENTS.md without our section');
+  installRules(root, ['agents']);
+  assert.strictEqual(hasAiRules(root), true);
+  fs.rmSync(root, { recursive: true });
+});

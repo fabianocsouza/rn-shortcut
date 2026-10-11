@@ -3,6 +3,7 @@
 const path = require('path');
 const vscode = require('vscode');
 const { installRules, TARGETS } = require('./lib/install');
+const { isReactNativeProject, hasAiRules } = require('./lib/detect');
 
 const DEFAULT_TARGETS = ['agents', 'cursor', 'copilot'];
 
@@ -62,9 +63,40 @@ function registerMcpServer(context) {
   );
 }
 
+const WALKTHROUGH = 'fabianocs.rn-shortcut#rnSnippets.gettingStarted';
+
+function openGetStarted() {
+  return vscode.commands.executeCommand('workbench.action.openWalkthrough', WALKTHROUGH, false);
+}
+
+// Offers the AI rules once per React Native project that doesn't have them,
+// so users find the feature without reading the README.
+async function suggestAiRules(context) {
+  if (context.globalState.get('rnSnippets.neverSuggestAiRules')) return;
+  const folder = (vscode.workspace.workspaceFolders || [])[0];
+  if (!folder || vscode.workspace.workspaceFolders.length > 1) return;
+  const root = folder.uri.fsPath;
+  if (context.workspaceState.get('rnSnippets.aiRulesSuggested') || !isReactNativeProject(root) || hasAiRules(root)) return;
+
+  await context.workspaceState.update('rnSnippets.aiRulesSuggested', true);
+  const choice = await vscode.window.showInformationMessage(
+    'React Native Snippets: make Copilot, Cursor and Claude follow the same templates as your snippets?',
+    'Add AI rules',
+    'Learn more',
+    "Don't ask again",
+  );
+  if (choice === 'Add AI rules') await vscode.commands.executeCommand('rnSnippets.addAiRules');
+  else if (choice === 'Learn more') await openGetStarted();
+  else if (choice === "Don't ask again") await context.globalState.update('rnSnippets.neverSuggestAiRules', true);
+}
+
 function activate(context) {
   const log = vscode.window.createOutputChannel('React Native Snippets');
-  context.subscriptions.push(log, vscode.commands.registerCommand('rnSnippets.addAiRules', addAiRules));
+  context.subscriptions.push(
+    log,
+    vscode.commands.registerCommand('rnSnippets.addAiRules', addAiRules),
+    vscode.commands.registerCommand('rnSnippets.getStarted', openGetStarted),
+  );
   try {
     registerMcpServer(context);
     log.appendLine('Activated: command and MCP server registered.');
@@ -72,6 +104,7 @@ function activate(context) {
     // The command must keep working even if this editor's MCP API differs.
     log.appendLine(`Activated without MCP server: ${err && err.stack ? err.stack : err}`);
   }
+  suggestAiRules(context).catch((err) => log.appendLine(`AI rules suggestion failed: ${err && err.stack ? err.stack : err}`));
 }
 
 function deactivate() {}

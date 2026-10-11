@@ -11,6 +11,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 - **AI rules:** `ai-rules/` has the snippet templates as instruction files for Cursor, GitHub Copilot, Claude Code and `AGENTS.md`, so AI-generated code follows the same patterns.
 - **Command "React Native Snippets: Add AI rules to project":** writes those files into the open project; existing files keep their content and re-running updates the section in place.
 - **MCP server** with `list_snippets` and `get_snippet`: registered automatically for Copilot in VS Code, and runnable with `npx -y github:fabianocsouza/rn-shortcut` for Claude Code, Cursor and other clients.
+- **Discoverable without the README:** opening a React Native/Expo project without the rules shows a one-time *Add AI rules* prompt, and a **Get Started** walkthrough (also via *React Native Snippets: Get Started*) explains snippets, AI rules and Copilot.
 - Unit tests (`npm test`) run in CI.
 
 ## [1.2.5] - 2026-10-06

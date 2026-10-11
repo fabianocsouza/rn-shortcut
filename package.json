@@ -76,12 +76,56 @@
         "command": "rnSnippets.addAiRules",
         "title": "Add AI rules to project",
         "category": "React Native Snippets"
+      },
+      {
+        "command": "rnSnippets.getStarted",
+        "title": "Get Started",
+        "category": "React Native Snippets"
       }
     ],
     "mcpServerDefinitionProviders": [
       {
         "id": "rnSnippets.mcp",
         "label": "React Native Snippets"
+      }
+    ],
+    "walkthroughs": [
+      {
+        "id": "rnSnippets.gettingStarted",
+        "title": "React Native Snippets",
+        "description": "Snippets for React Native and Expo, and AI assistants that follow the same templates.",
+        "steps": [
+          {
+            "id": "snippets",
+            "title": "Type a prefix, press Tab",
+            "description": "Type rn, rn-props, rn-fl or rn-ctx in a .tsx file and press Tab.\n[Open a new TSX file](command:workbench.action.files.newUntitledFile?%7B%22languageId%22%3A%22typescriptreact%22%7D)",
+            "media": {
+              "markdown": "media/walkthrough/snippets.md"
+            },
+            "completionEvents": [
+              "onLanguage:typescriptreact"
+            ]
+          },
+          {
+            "id": "aiRules",
+            "title": "Make AI follow the same templates",
+            "description": "Write instruction files for Copilot, Cursor and Claude Code into this project.\n[Add AI rules](command:rnSnippets.addAiRules)",
+            "media": {
+              "markdown": "media/walkthrough/ai-rules.md"
+            },
+            "completionEvents": [
+              "onCommand:rnSnippets.addAiRules"
+            ]
+          },
+          {
+            "id": "copilot",
+            "title": "Let Copilot fetch the templates",
+            "description": "The React Native Snippets MCP server is added to Copilot automatically. Use Agent mode and ask for React Native code.\n[Open Chat](command:workbench.action.chat.open)",
+            "media": {
+              "markdown": "media/walkthrough/copilot.md"
+            }
+          }
+        ]
       }
     ]
   },
