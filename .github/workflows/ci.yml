@@ -15,5 +15,9 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      - run: node -e "require('fs').readFileSync('snippets/snippets.code-snippets','utf8')"
+      - run: npm test
+      - name: AI rules are up to date with the snippets
+        run: |
+          npm run build:ai-rules
+          git diff --exit-code -- ai-rules || (echo "Run 'npm run build:ai-rules' and commit the result." && exit 1)
       - run: npm run package

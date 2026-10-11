@@ -86,18 +86,36 @@ List of available snippets. **⇥** means the `TAB` key.
 
 ---
 
+## Use with AI (Cursor, Copilot, Claude Code…)
+
+AI assistants don't trigger snippets, but they do read instruction files in your project. The [`ai-rules/`](ai-rules) folder has the same templates as the snippets, ready for each tool, so AI-generated code follows the same patterns:
+
+| Tool | Copy this file | To |
+| --- | --- | --- |
+| Cursor | [`ai-rules/react-native-snippets.mdc`](ai-rules/react-native-snippets.mdc) | `.cursor/rules/react-native-snippets.mdc` |
+| GitHub Copilot | [`ai-rules/copilot-instructions.md`](ai-rules/copilot-instructions.md) | `.github/copilot-instructions.md` |
+| Claude Code | [`ai-rules/CLAUDE.md`](ai-rules/CLAUDE.md) | `CLAUDE.md` |
+| Codex and other agents | [`ai-rules/AGENTS.md`](ai-rules/AGENTS.md) | `AGENTS.md` |
+
+If the target file already exists, paste the content at the end of it.
+
+---
+
 ## Contribution
 
 To work on the extension locally (requires Node.js 22+):
 
 ```bash
 npm install
+npm test               # unit tests
 npm run package        # generates the .vsix file
 npm run publish        # VS Code Marketplace
 npm run publish:ovsx   # Open VSX (Cursor, Windsurf, VSCodium)
 ```
 
 Press `F5` in VS Code to open a window with the extension loaded.
+
+After changing a snippet, run `npm run build:ai-rules` to regenerate `ai-rules/` (CI checks it).
 
 Releases are automatic: bump `version` in `package.json` (and the CHANGELOG), merge to `main`, and the **Release** workflow publishes to the VS Code Marketplace and Open VSX and creates a GitHub release.
 

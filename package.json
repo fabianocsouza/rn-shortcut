@@ -61,6 +61,8 @@
     "@vscode/vsce": "^4.0.0"
   },
   "scripts": {
+    "test": "node --test test/*.test.js",
+    "build:ai-rules": "node scripts/build-ai-rules.js",
     "package": "vsce package",
     "publish": "vsce publish",
     "publish:ovsx": "npx --yes ovsx publish"
