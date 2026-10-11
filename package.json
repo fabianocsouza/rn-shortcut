@@ -1,7 +1,7 @@
 {
   "name": "rn-shortcut",
-  "displayName": "React Native Snippets – TypeScript & Expo",
-  "description": "Snippets for React Native and Expo: components, StyleSheet, styled-components, hooks, FlatList and Context. JS/TS.",
+  "displayName": "%displayName%",
+  "description": "%description%",
   "publisher": "fabianocs",
   "author": {
     "name": "Fabiano C. Souza"
@@ -74,12 +74,22 @@
     "commands": [
       {
         "command": "rnSnippets.addAiRules",
-        "title": "Add AI rules to project",
+        "title": "%cmd.addAiRules%",
         "category": "React Native Snippets"
       },
       {
         "command": "rnSnippets.getStarted",
-        "title": "Get Started",
+        "title": "%cmd.getStarted%",
+        "category": "React Native Snippets"
+      },
+      {
+        "command": "rnSnippets.tryIt",
+        "title": "%cmd.tryIt%",
+        "category": "React Native Snippets"
+      },
+      {
+        "command": "rnSnippets.copyMcpConfig",
+        "title": "%cmd.copyMcpConfig%",
         "category": "React Native Snippets"
       }
     ],
@@ -92,26 +102,66 @@
     "walkthroughs": [
       {
         "id": "rnSnippets.gettingStarted",
-        "title": "React Native Snippets",
-        "description": "Snippets for React Native and Expo, and AI assistants that follow the same templates.",
+        "title": "%wt.title%",
+        "description": "%wt.description%",
         "steps": [
           {
-            "id": "snippets",
-            "title": "Type a prefix, press Tab",
-            "description": "Type rn, rn-props, rn-fl or rn-ctx in a .tsx file and press Tab.\n[Open a new TSX file](command:workbench.action.files.newUntitledFile?%7B%22languageId%22%3A%22typescriptreact%22%7D)",
+            "id": "welcome",
+            "title": "%wt.welcome.title%",
+            "description": "%wt.welcome.description%",
             "media": {
-              "markdown": "media/walkthrough/snippets.md"
+              "image": {
+                "dark": "media/walkthrough/welcome-dark.webp",
+                "light": "media/walkthrough/welcome-light.webp",
+                "hc": "media/walkthrough/welcome-dark.webp",
+                "hcLight": "media/walkthrough/welcome-light.webp"
+              },
+              "altText": "%wt.welcome.alt%"
+            }
+          },
+          {
+            "id": "snippets",
+            "title": "%wt.snippets.title%",
+            "description": "%wt.snippets.description%",
+            "media": {
+              "image": {
+                "dark": "media/walkthrough/snippets-dark.webp",
+                "light": "media/walkthrough/snippets-light.webp",
+                "hc": "media/walkthrough/snippets-dark.webp",
+                "hcLight": "media/walkthrough/snippets-light.webp"
+              },
+              "altText": "%wt.snippets.alt%"
             },
             "completionEvents": [
-              "onLanguage:typescriptreact"
+              "onCommand:rnSnippets.tryIt"
             ]
           },
           {
-            "id": "aiRules",
-            "title": "Make AI follow the same templates",
-            "description": "Write instruction files for Copilot, Cursor and Claude Code into this project.\n[Add AI rules](command:rnSnippets.addAiRules)",
+            "id": "boilerplate",
+            "title": "%wt.boilerplate.title%",
+            "description": "%wt.boilerplate.description%",
             "media": {
-              "markdown": "media/walkthrough/ai-rules.md"
+              "image": {
+                "dark": "media/walkthrough/boilerplate-dark.webp",
+                "light": "media/walkthrough/boilerplate-light.webp",
+                "hc": "media/walkthrough/boilerplate-dark.webp",
+                "hcLight": "media/walkthrough/boilerplate-light.webp"
+              },
+              "altText": "%wt.boilerplate.alt%"
+            }
+          },
+          {
+            "id": "aiRules",
+            "title": "%wt.aiRules.title%",
+            "description": "%wt.aiRules.description%",
+            "media": {
+              "image": {
+                "dark": "media/walkthrough/ai-rules-dark.webp",
+                "light": "media/walkthrough/ai-rules-light.webp",
+                "hc": "media/walkthrough/ai-rules-dark.webp",
+                "hcLight": "media/walkthrough/ai-rules-light.webp"
+              },
+              "altText": "%wt.aiRules.alt%"
             },
             "completionEvents": [
               "onCommand:rnSnippets.addAiRules"
@@ -119,10 +169,30 @@
           },
           {
             "id": "copilot",
-            "title": "Let Copilot fetch the templates",
-            "description": "The React Native Snippets MCP server is added to Copilot automatically. Use Agent mode and ask for React Native code.\n[Open Chat](command:workbench.action.chat.open)",
+            "title": "%wt.copilot.title%",
+            "description": "%wt.copilot.description%",
             "media": {
-              "markdown": "media/walkthrough/copilot.md"
+              "image": {
+                "dark": "media/walkthrough/copilot-dark.webp",
+                "light": "media/walkthrough/copilot-light.webp",
+                "hc": "media/walkthrough/copilot-dark.webp",
+                "hcLight": "media/walkthrough/copilot-light.webp"
+              },
+              "altText": "%wt.copilot.alt%"
+            }
+          },
+          {
+            "id": "rate",
+            "title": "%wt.rate.title%",
+            "description": "%wt.rate.description%",
+            "media": {
+              "image": {
+                "dark": "media/walkthrough/rate-dark.webp",
+                "light": "media/walkthrough/rate-light.webp",
+                "hc": "media/walkthrough/rate-dark.webp",
+                "hcLight": "media/walkthrough/rate-light.webp"
+              },
+              "altText": "%wt.rate.alt%"
             }
           }
         ]

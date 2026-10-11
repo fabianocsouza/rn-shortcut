@@ -65,6 +65,58 @@ function registerMcpServer(context) {
 
 const WALKTHROUGH = 'fabianocs.rn-shortcut#rnSnippets.gettingStarted';
 
+const isPt = () => (vscode.env.language || '').toLowerCase().startsWith('pt');
+
+const PLAYGROUND = {
+  en: [
+    '// React Native Snippets — playground (this file is not saved anywhere)',
+    '// 1. Put the cursor on the empty line below.',
+    '// 2. Type rn-ctx and press Tab, then type a name like Auth and press Tab to move on.',
+    '// Also try: rn, rn-props, rn-fl, ust, uef',
+    '',
+    '',
+  ],
+  pt: [
+    '// React Native Snippets — área de testes (este arquivo não é salvo)',
+    '// 1. Coloque o cursor na linha vazia abaixo.',
+    '// 2. Digite rn-ctx e aperte Tab; depois digite um nome, como Auth, e aperte Tab para avançar.',
+    '// Experimente também: rn, rn-props, rn-fl, ust, uef',
+    '',
+    '',
+  ],
+};
+
+async function tryIt() {
+  const lines = PLAYGROUND[isPt() ? 'pt' : 'en'];
+  const doc = await vscode.workspace.openTextDocument({ language: 'typescriptreact', content: lines.join('\n') });
+  const editor = await vscode.window.showTextDocument(doc);
+  const end = new vscode.Position(lines.length - 1, 0);
+  editor.selection = new vscode.Selection(end, end);
+}
+
+const MCP_SETUP = {
+  json: JSON.stringify({ mcpServers: { 'rn-snippets': { command: 'npx', args: ['-y', 'github:fabianocsouza/rn-shortcut'] } } }, null, 2),
+  claude: 'claude mcp add rn-snippets -- npx -y github:fabianocsouza/rn-shortcut',
+};
+
+async function copyMcpConfig() {
+  const pt = isPt();
+  const pick = await vscode.window.showQuickPick(
+    [
+      { label: 'Cursor', detail: pt ? 'JSON para .cursor/mcp.json (também serve para outros clientes MCP)' : 'JSON for .cursor/mcp.json (works for other MCP clients too)', value: 'json' },
+      { label: 'Claude Code', detail: pt ? 'Comando para colar no terminal' : 'Command to paste in your terminal', value: 'claude' },
+    ],
+    { title: pt ? 'Copiar configuração do MCP' : 'Copy MCP setup', placeHolder: pt ? 'Qual ferramenta você usa?' : 'Which tool do you use?' },
+  );
+  if (!pick) return;
+  await vscode.env.clipboard.writeText(MCP_SETUP[pick.value]);
+  vscode.window.showInformationMessage(
+    pick.value === 'json'
+      ? (pt ? 'Copiado! Cole em .cursor/mcp.json (Node.js 18+ necessário).' : 'Copied! Paste it into .cursor/mcp.json (requires Node.js 18+).')
+      : (pt ? 'Copiado! Cole no terminal (Node.js 18+ necessário).' : 'Copied! Paste it in your terminal (requires Node.js 18+).'),
+  );
+}
+
 function openGetStarted() {
   return vscode.commands.executeCommand('workbench.action.openWalkthrough', WALKTHROUGH, false);
 }
@@ -73,21 +125,33 @@ function openGetStarted() {
 // so users find the feature without reading the README.
 async function suggestAiRules(context) {
   if (context.globalState.get('rnSnippets.neverSuggestAiRules')) return;
+  // First run after install: show the walkthrough instead, it covers the same thing.
+  if (!context.globalState.get('rnSnippets.walkthroughShown')) {
+    await context.globalState.update('rnSnippets.walkthroughShown', true);
+    await openGetStarted();
+    return;
+  }
   const folder = (vscode.workspace.workspaceFolders || [])[0];
   if (!folder || vscode.workspace.workspaceFolders.length > 1) return;
   const root = folder.uri.fsPath;
   if (context.workspaceState.get('rnSnippets.aiRulesSuggested') || !isReactNativeProject(root) || hasAiRules(root)) return;
 
   await context.workspaceState.update('rnSnippets.aiRulesSuggested', true);
+  const pt = isPt();
+  const add = pt ? 'Adicionar regras de IA' : 'Add AI rules';
+  const more = pt ? 'Saiba mais' : 'Learn more';
+  const never = pt ? 'Não perguntar de novo' : "Don't ask again";
   const choice = await vscode.window.showInformationMessage(
-    'React Native Snippets: make Copilot, Cursor and Claude follow the same templates as your snippets?',
-    'Add AI rules',
-    'Learn more',
-    "Don't ask again",
+    pt
+      ? 'React Native Snippets: fazer o Copilot, o Cursor e o Claude seguirem os mesmos modelos dos seus snippets?'
+      : 'React Native Snippets: make Copilot, Cursor and Claude follow the same templates as your snippets?',
+    add,
+    more,
+    never,
   );
-  if (choice === 'Add AI rules') await vscode.commands.executeCommand('rnSnippets.addAiRules');
-  else if (choice === 'Learn more') await openGetStarted();
-  else if (choice === "Don't ask again") await context.globalState.update('rnSnippets.neverSuggestAiRules', true);
+  if (choice === add) await vscode.commands.executeCommand('rnSnippets.addAiRules');
+  else if (choice === more) await openGetStarted();
+  else if (choice === never) await context.globalState.update('rnSnippets.neverSuggestAiRules', true);
 }
 
 function activate(context) {
@@ -96,6 +160,8 @@ function activate(context) {
     log,
     vscode.commands.registerCommand('rnSnippets.addAiRules', addAiRules),
     vscode.commands.registerCommand('rnSnippets.getStarted', openGetStarted),
+    vscode.commands.registerCommand('rnSnippets.tryIt', tryIt),
+    vscode.commands.registerCommand('rnSnippets.copyMcpConfig', copyMcpConfig),
   );
   try {
     registerMcpServer(context);
