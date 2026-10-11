@@ -14,6 +14,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 - **Discoverable without the README:** opening a React Native/Expo project without the rules shows a one-time *Add AI rules* prompt, and a **Get Started** walkthrough (also via *React Native Snippets: Get Started*) explains snippets, AI rules and Copilot.
 - **New Get Started walkthrough** in 6 steps with illustrations for dark and light themes. It opens once after install and has buttons to try the snippets (*Try the snippets* opens a playground file), add AI rules, open Copilot Chat, copy the MCP setup for Cursor / Claude Code, and rate the extension.
 - Walkthrough, commands and prompts in **English and Brazilian Portuguese**.
+- New README banner; the extension is called **React Native Snippets** everywhere (the ID `fabianocs.rn-shortcut` is unchanged).
 - Unit tests (`npm test`) run in CI.
 
 ## [1.2.5] - 2026-10-06

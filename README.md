@@ -6,7 +6,7 @@
 -->
 
 <h1 align="center">
-  <img alt="React Native Shortcut" width="90%" title="React Native Shortcut" src="./assets/header.png" />
+  <img alt="React Native Snippets" width="100%" title="React Native Snippets" src="./assets/banner.png" />
 </h1>
 
 <p align="center">
@@ -49,7 +49,7 @@ Works in **VS Code**, **Cursor**, **Windsurf** and **VSCodium** (via [Open VSX](
 
 ## Getting started
 
-Install **React Native Shortcut** from the VS Code Marketplace, open any `.js`, `.jsx`, `.ts` or `.tsx` file in VS Code, type a snippet prefix and press `Tab`.
+Install **React Native Snippets** from the VS Code Marketplace, open any `.js`, `.jsx`, `.ts` or `.tsx` file in VS Code, type a snippet prefix and press `Tab`.
 
 Example: type `rn` and press `Tab` to create a basic React Native component.
 
