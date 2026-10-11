@@ -18,6 +18,16 @@
 
 </br>
 
+### ✨ New in 1.3: your AI follows the same templates
+
+Copilot, Cursor and Claude Code generate React Native code in the same shape as your snippets. Open a React Native or Expo project and click **Add AI rules**. Copilot fetches the templates by itself, with no setup. [How it works ↓](#use-with-ai-cursor-copilot-claude-code)
+
+<p align="center">
+  <img alt="Add AI rules, then Copilot calls get_snippet and creates an AuthProvider from the rn-ctx template" width="100%" src=".github/rns-ai.gif" />
+</p>
+
+### Snippets in action
+
 <p align="center">
   <img alt="rn-ctx and rn-fl snippets in action" width="100%" src=".github/rns-demo.gif" />
 </p>
