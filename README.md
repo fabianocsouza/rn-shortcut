@@ -88,7 +88,11 @@ List of available snippets. **⇥** means the `TAB` key.
 
 ## Use with AI (Cursor, Copilot, Claude Code…)
 
-AI assistants don't trigger snippets, but they do read instruction files in your project. The [`ai-rules/`](ai-rules) folder has the same templates as the snippets, ready for each tool, so AI-generated code follows the same patterns:
+AI assistants don't trigger snippets, but they do read instruction files in your project. This extension can write those files for you, with the same templates as the snippets, so AI-generated code follows the same patterns.
+
+**From the editor:** open the Command Palette (`Cmd/Ctrl+Shift+P`) and run **React Native Snippets: Add AI rules to project**. Pick your tools and the files are created, or updated in place if they already exist (your own content is kept).
+
+**By hand:** copy the file for your tool from [`ai-rules/`](ai-rules):
 
 | Tool | Copy this file | To |
 | --- | --- | --- |

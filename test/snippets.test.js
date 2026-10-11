@@ -49,3 +49,23 @@ test('mergeSection appends once and replaces on re-run', () => {
   assert.doesNotMatch(second, /old/);
   assert.ok(second.trimEnd().endsWith(END));
 });
+
+test('installRules creates, merges and is idempotent', () => {
+  const fs = require('fs');
+  const os = require('os');
+  const path = require('path');
+  const { installRules } = require('../lib/install');
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'rn-rules-'));
+  fs.writeFileSync(path.join(root, 'AGENTS.md'), '# Team rules\n\nBe nice.\n');
+
+  const first = installRules(root, ['agents', 'cursor', 'copilot']);
+  assert.deepStrictEqual(first.map((r) => r.action), ['updated', 'created', 'created']);
+  const agents = fs.readFileSync(path.join(root, 'AGENTS.md'), 'utf8');
+  assert.match(agents, /^# Team rules\n\nBe nice\.\n\n<!-- rn-snippets:start -->/);
+  assert.ok(fs.existsSync(path.join(root, '.cursor/rules/react-native-snippets.mdc')));
+  assert.ok(fs.existsSync(path.join(root, '.github/copilot-instructions.md')));
+
+  const second = installRules(root, ['agents', 'cursor', 'copilot']);
+  assert.deepStrictEqual(second.map((r) => r.action), ['unchanged', 'unchanged', 'unchanged']);
+  fs.rmSync(root, { recursive: true });
+});

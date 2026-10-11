@@ -35,8 +35,17 @@
     "vscode": "^1.102.0"
   },
   "categories": [
-    "Snippets"
+    "Snippets",
+    "AI"
   ],
+  "main": "./extension.js",
+  "activationEvents": [],
+  "capabilities": {
+    "virtualWorkspaces": false,
+    "untrustedWorkspaces": {
+      "supported": true
+    }
+  },
   "contributes": {
     "snippets": [
       {
@@ -54,6 +63,13 @@
       {
         "language": "typescriptreact",
         "path": "./snippets/snippets.code-snippets"
+      }
+    ],
+    "commands": [
+      {
+        "command": "rnSnippets.addAiRules",
+        "title": "Add AI rules to project",
+        "category": "React Native Snippets"
       }
     ]
   },
