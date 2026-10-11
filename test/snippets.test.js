@@ -19,8 +19,8 @@ test('every snippet renders without leftover placeholders', () => {
   }
 });
 
-test('rn-ctx mirrors the name and capitalizes the setter', () => {
-  const code = renderSnippet(get('rn-ctx').body, { 1: 'Auth', 2: 'user', 3: 'User | null', 4: 'null' });
+test('rn-ctx mirrors the name and the setter', () => {
+  const code = renderSnippet(get('rn-ctx').body, { 1: 'Auth', 2: 'user', 3: 'User | null', 4: 'setUser', 5: 'null' });
   assert.match(code, /type AuthContextData = \{/);
   assert.match(code, /const \[user, setUser\] = useState<User \| null>\(null\);/);
   assert.match(code, /export function useAuth\(\)/);
@@ -72,7 +72,7 @@ test('installRules creates, merges and is idempotent', () => {
 
 test('tabStops ignores folder-name and mirrored transforms', () => {
   assert.deepStrictEqual(tabStops(get('rn').body), {});
-  assert.deepStrictEqual(tabStops(get('rn-ctx').body), { 1: 'Name', 2: 'value', 3: 'string', 4: "''" });
+  assert.deepStrictEqual(tabStops(get('rn-ctx').body), { 1: 'Name', 2: 'value', 3: 'string', 4: 'setValue', 5: "''" });
 });
 
 test('MCP server answers initialize, tools/list and tools/call', async () => {
@@ -153,6 +153,7 @@ test('native Copilot tools are declared in package.json and match the shared ans
   assert.strictEqual(pkg.contributes.mcpServerDefinitionProviders, undefined, 'no duplicate MCP tools in VS Code');
   assert.match(listSnippetsText(), /- rn-ctx: /);
   assert.match(getSnippetText({ prefix: 'rn-ctx', values: { 1: 'Auth' } }), /export function useAuth\(\)/);
+  assert.match(getSnippetText({ prefix: 'rn-ctx' }), /const \[value, setValue\] = useState<string>\(''\);/, 'defaults never produce "setvalue"');
 });
 
 test('extension activates and every command runs against a stubbed VS Code', async () => {

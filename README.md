@@ -29,7 +29,7 @@ Copilot, Cursor and Claude Code generate React Native code in the same shape as 
 ### Snippets in action
 
 <p align="center">
-  <img alt="rn-ctx and rn-fl snippets in action" width="100%" src=".github/rns-demo.gif" />
+  <img alt="rn-ctx and rn-fl snippets in action" width="100%" src=".github/rns-ctx.gif" />
 </p>
 
 <p align="center">

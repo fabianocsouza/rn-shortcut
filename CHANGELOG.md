@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
 ## [1.3.0] - 2026-10-11
 
+### Changed
+
+- `rn-ctx`: the setter (`setValue`) is now its own field with a correct default, so leaving the snippet early no longer produces `setvalue`. Fields: name → value → type → setter → initial value.
+
 ### Added
 
 - **AI rules:** `ai-rules/` has the snippet templates as instruction files for Cursor, GitHub Copilot, Claude Code and `AGENTS.md`, so AI-generated code follows the same patterns.
