@@ -9,6 +9,8 @@ alwaysApply: false
 This project uses the React Native Snippets extension (fabianocs.rn-shortcut).
 When you write React Native / Expo code here, follow these templates so generated code matches what developers get from the snippets:
 
+- Before writing a component, screen, context, FlatList or hook, get the template from the React Native Snippets tool when it is available (`get_snippet`, or `#rnSnippet` in VS Code Copilot) and build on its result.
+- Keep the template structure and do not add state, props or features the user did not ask for.
 - Use named exports: `export function ComponentName()`, never default exports.
 - Name a component after its folder (`Home/index.tsx` exports `Home`).
 - Replace placeholder names (`ComponentName`, `Name`, `value`, `data`…) with names that fit the task.

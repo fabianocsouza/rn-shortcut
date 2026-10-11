@@ -147,6 +147,9 @@ test('native Copilot tools are declared in package.json and match the shared ans
   const names = pkg.contributes.languageModelTools.map((t) => t.name);
   assert.deepStrictEqual(names, ['rnSnippets_listSnippets', 'rnSnippets_getSnippet']);
   assert.deepStrictEqual(pkg.contributes.languageModelTools[1].inputSchema, GET_SCHEMA, 'schema in package.json is up to date');
+  const { DESCRIPTIONS } = require('../lib/tools');
+  assert.strictEqual(pkg.contributes.languageModelTools[0].modelDescription, DESCRIPTIONS.list);
+  assert.strictEqual(pkg.contributes.languageModelTools[1].modelDescription, DESCRIPTIONS.get);
   assert.strictEqual(pkg.contributes.mcpServerDefinitionProviders, undefined, 'no duplicate MCP tools in VS Code');
   assert.match(listSnippetsText(), /- rn-ctx: /);
   assert.match(getSnippetText({ prefix: 'rn-ctx', values: { 1: 'Auth' } }), /export function useAuth\(\)/);
