@@ -6,6 +6,16 @@ const { installRules, TARGETS } = require('./lib/install');
 
 const DEFAULT_TARGETS = ['agents', 'cursor', 'copilot'];
 
+// "Created: A. Updated: B. Already up to date: C." so a re-run with a
+// different selection still makes clear which files were left alone.
+function summarize(results) {
+  const groups = [['created', 'Created'], ['updated', 'Updated'], ['unchanged', 'Already up to date']]
+    .map(([action, label]) => [label, results.filter((r) => r.action === action).map((r) => r.file)])
+    .filter(([, files]) => files.length);
+  if (groups.length === 1 && groups[0][0] === 'Already up to date') return 'AI rules are already up to date.';
+  return 'React Native AI rules — ' + groups.map(([label, files]) => `${label}: ${files.join(', ')}`).join('. ') + '.';
+}
+
 async function addAiRules() {
   const folder = (vscode.workspace.workspaceFolders || []).length > 1
     ? await vscode.window.showWorkspaceFolderPick({ placeHolder: 'Add the AI rules to which folder?' })
@@ -30,11 +40,7 @@ async function addAiRules() {
   }
 
   const changed = results.filter((r) => r.action !== 'unchanged');
-  const summary = results.map((r) => `${r.file} (${r.action})`).join(', ');
-  const choice = await vscode.window.showInformationMessage(
-    changed.length ? `AI rules added: ${summary}` : 'AI rules are already up to date.',
-    'Open file',
-  );
+  const choice = await vscode.window.showInformationMessage(summarize(results), 'Open file');
   if (choice === 'Open file') {
     await vscode.window.showTextDocument(vscode.Uri.file((changed[0] || results[0]).path));
   }
@@ -70,4 +76,4 @@ function activate(context) {
 
 function deactivate() {}
 
-module.exports = { activate, deactivate };
+module.exports = { activate, deactivate, summarize };
