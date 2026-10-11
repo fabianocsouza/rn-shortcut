@@ -4,17 +4,21 @@ const path = require('path');
 const vscode = require('vscode');
 const { installRules, TARGETS } = require('./lib/install');
 const { isReactNativeProject, hasAiRules } = require('./lib/detect');
+const { findGitDir, excludeLocally } = require('./lib/gitexclude');
 
 const DEFAULT_TARGETS = ['agents', 'cursor', 'copilot'];
 
 // "Created: A. Updated: B. Already up to date: C." so a re-run with a
 // different selection still makes clear which files were left alone.
-function summarize(results) {
-  const groups = [['created', 'Created'], ['updated', 'Updated'], ['unchanged', 'Already up to date']]
-    .map(([action, label]) => [label, results.filter((r) => r.action === action).map((r) => r.file)])
+function summarize(results, pt = isPt()) {
+  const L = pt
+    ? { created: 'Criados', updated: 'Atualizados', unchanged: 'Já estavam em dia', title: 'Regras de IA do React Native', none: 'As regras de IA já estão em dia.' }
+    : { created: 'Created', updated: 'Updated', unchanged: 'Already up to date', title: 'React Native AI rules', none: 'AI rules are already up to date.' };
+  const groups = ['created', 'updated', 'unchanged']
+    .map((action) => [action, results.filter((r) => r.action === action).map((r) => r.file)])
     .filter(([, files]) => files.length);
-  if (groups.length === 1 && groups[0][0] === 'Already up to date') return 'AI rules are already up to date.';
-  return 'React Native AI rules — ' + groups.map(([label, files]) => `${label}: ${files.join(', ')}`).join('. ') + '.';
+  if (groups.length === 1 && groups[0][0] === 'unchanged') return L.none;
+  return `${L.title}: ` + groups.map(([action, files]) => `${L[action]}: ${files.join(', ')}`).join('. ') + '.';
 }
 
 async function addAiRules() {
@@ -41,8 +45,41 @@ async function addAiRules() {
   }
 
   const changed = results.filter((r) => r.action !== 'unchanged');
-  const choice = await vscode.window.showInformationMessage(summarize(results), 'Open file');
-  if (choice === 'Open file') {
+  const created = results.filter((r) => r.action === 'created');
+  const root = folder.uri.fsPath;
+  const pt = isPt();
+  const open = pt ? 'Abrir arquivo' : 'Open file';
+
+  // Files we just created can be kept out of Git locally. Files that already
+  // existed are the user's own and are never hidden.
+  if (created.length && findGitDir(root)) {
+    const share = pt ? 'Compartilhar com o projeto' : 'Share with project';
+    const local = pt ? 'Manter só nesta máquina' : 'Keep on this machine only';
+    const choice = await vscode.window.showInformationMessage(
+      summarize(results) + (pt
+        ? ' Recomendado: faça commit para a equipe e os agentes na nuvem usarem as regras.'
+        : ' Recommended: commit them so your team and cloud agents get the rules too.'),
+      share,
+      local,
+      open,
+    );
+    if (choice === local) {
+      try {
+        excludeLocally(root, created.map((r) => r.file));
+        vscode.window.showInformationMessage(pt
+          ? 'Pronto: os arquivos criados ficam fora do Git só nesta máquina (.git/info/exclude). Nada muda para a equipe.'
+          : 'Done: the new files are hidden from Git on this machine only (.git/info/exclude). Nothing changes for your team.');
+      } catch (err) {
+        vscode.window.showErrorMessage(`Couldn't update .git/info/exclude: ${err.message}`);
+      }
+    } else if (choice === open) {
+      await vscode.window.showTextDocument(vscode.Uri.file(created[0].path));
+    }
+    return;
+  }
+
+  const choice = await vscode.window.showInformationMessage(summarize(results), open);
+  if (choice === open) {
     await vscode.window.showTextDocument(vscode.Uri.file((changed[0] || results[0]).path));
   }
 }

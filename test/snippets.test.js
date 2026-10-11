@@ -116,3 +116,27 @@ test('detects React Native projects and existing AI rules', () => {
   assert.strictEqual(hasAiRules(root), true);
   fs.rmSync(root, { recursive: true });
 });
+
+test('excludeLocally hides only the given files, once, and follows .git files', () => {
+  const fs = require('fs');
+  const os = require('os');
+  const path = require('path');
+  const { excludeLocally, findGitDir } = require('../lib/gitexclude');
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'rn-git-'));
+  assert.strictEqual(excludeLocally(root, ['AGENTS.md']), null, 'not a git repo');
+
+  fs.mkdirSync(path.join(root, '.git', 'info'), { recursive: true });
+  fs.writeFileSync(path.join(root, '.git', 'info', 'exclude'), '# git ls-files --others --exclude-from=.git/info/exclude\n');
+  assert.deepStrictEqual(excludeLocally(root, ['CLAUDE.md', path.join('.cursor', 'rules', 'react-native-snippets.mdc')]),
+    ['/CLAUDE.md', '/.cursor/rules/react-native-snippets.mdc']);
+  assert.deepStrictEqual(excludeLocally(root, ['CLAUDE.md']), [], 'idempotent');
+  const text = fs.readFileSync(path.join(root, '.git', 'info', 'exclude'), 'utf8');
+  assert.match(text, /^# git ls-files/);
+  assert.strictEqual(text.split('React Native Snippets').length, 2, 'header written once');
+
+  const wt = fs.mkdtempSync(path.join(os.tmpdir(), 'rn-wt-'));
+  fs.writeFileSync(path.join(wt, '.git'), `gitdir: ${path.join(root, '.git')}\n`);
+  assert.strictEqual(findGitDir(wt), path.join(root, '.git'));
+  fs.rmSync(root, { recursive: true });
+  fs.rmSync(wt, { recursive: true });
+});

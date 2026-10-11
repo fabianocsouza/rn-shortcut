@@ -102,6 +102,8 @@ AI assistants don't trigger snippets, but they do read instruction files in your
 
 **From the editor:** when you open a React Native or Expo project, the extension offers to add them (one click). You can also open the Command Palette (`Cmd/Ctrl+Shift+P`) and run **React Native Snippets: Add AI rules to project**. Pick your tools and the files are created, or updated in place if they already exist (your own content is kept). **React Native Snippets: Get Started** opens a short walkthrough.
 
+The files are meant to be **committed**, so your team and cloud agents (Copilot coding agent, Codex, Claude Code on the web) get the same rules. Prefer to keep them to yourself? Choose **Keep on this machine only**: the files the extension created are hidden through `.git/info/exclude`, which is local and never committed. Files that already existed, like your own `AGENTS.md`, are never hidden.
+
 **By hand:** copy the file for your tool from [`ai-rules/`](ai-rules):
 
 | Tool | Copy this file | To |

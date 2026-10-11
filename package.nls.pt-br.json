@@ -17,7 +17,7 @@
   "wt.boilerplate.description": "rn-fl, rn-props e rn-ctx escrevem o código repetitivo. Aperte Tab para pular entre os campos; no rn-ctx o nome que você digita se repete em tudo.\n[Testar agora](command:rnSnippets.tryIt)",
   "wt.boilerplate.alt": "Um FlatList e um componente com Props tipadas gerados pelos snippets",
   "wt.aiRules.title": "🤖 Faça a IA seguir os mesmos modelos",
-  "wt.aiRules.description": "Cria os arquivos de instruções que o Copilot, o Cursor e o Claude Code leem. Arquivos que já existem mantêm o seu conteúdo.\n[Adicionar regras de IA](command:rnSnippets.addAiRules)",
+  "wt.aiRules.description": "Cria os arquivos de instruções que o Copilot, o Cursor e o Claude Code leem. Arquivos que já existem mantêm o seu conteúdo. Se preferir, dá para mantê-los só nesta máquina.\n[Adicionar regras de IA](command:rnSnippets.addAiRules)",
   "wt.aiRules.alt": "Árvore do projeto com AGENTS.md, CLAUDE.md, regra do Cursor e instruções do Copilot",
   "wt.copilot.title": "💬 O Copilot busca os modelos sozinho",
   "wt.copilot.description": "O servidor MCP incluído deixa o Copilot, no modo agente, chamar o get_snippet, sem configurar nada. Usa Cursor ou Claude Code? Copie a configuração de uma linha.\n[Abrir o chat](command:workbench.action.chat.open)\n[Copiar configuração do MCP](command:rnSnippets.copyMcpConfig)",
