@@ -4,6 +4,12 @@ All notable changes to the "rn-shortcut" extension will be documented in this fi
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
+## [1.3.1] - 2026-10-11
+
+### Changed
+
+- README: clearer "AI asks the extension for the templates" section, with a setup table per editor and the details in a collapsible block.
+
 ## [1.3.0] - 2026-10-11
 
 ### Changed

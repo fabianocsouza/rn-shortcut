@@ -117,15 +117,21 @@ If the target file already exists, paste the content at the end of it.
 
 ### AI asks the extension for the templates
 
-Assistants can fetch a template filled in with their own names (e.g. `rn-ctx` with `Auth`/`user`) through two tools, `list_snippets` and `get_snippet`.
+Assistants can fetch a template filled in with their own names (e.g. `rn-ctx` with `Auth` / `user`) through two tools, `list_snippets` and `get_snippet`.
 
-- **VS Code + Copilot:** nothing to set up. The extension adds the tools to Copilot directly, so **React Native Snippets** shows up **enabled** in Copilot's tool list (agent mode). You can also mention them in a prompt with `#rnSnippet` / `#rnSnippets`. The first time Copilot uses them it may ask for permission; pick **Always Allow** in the menu next to **Allow** to stop the prompt. The model decides when to call a tool; to get the exact template every time, name it in your prompt, e.g. *"Use #rnSnippet rn-ctx to create an auth context"*.
-- **Cursor, Claude Code and other MCP clients:** the extension also ships an [MCP](https://modelcontextprotocol.io) server with the same tools (Node.js 18+). Run **React Native Snippets: Copy MCP setup** from the Command Palette, or use:
-- **Claude Code:**
-  ```bash
-  claude mcp add rn-snippets -- npx -y github:fabianocsouza/rn-shortcut
-  ```
-- **Cursor** (`.cursor/mcp.json`) and other MCP clients:
+| Editor | Setup |
+| --- | --- |
+| **VS Code + Copilot** | Nothing: the tools are already enabled in agent mode. Tip: write `#rnSnippet` in your prompt to get the exact template. |
+| **Claude Code** | `claude mcp add rn-snippets -- npx -y github:fabianocsouza/rn-shortcut` |
+| **Cursor** | Command Palette → **React Native Snippets: Copy MCP setup** → paste into `.cursor/mcp.json` |
+
+<details>
+<summary>More details</summary>
+
+- **Permission:** the first time Copilot uses a tool it may ask for permission. Pick **Always Allow** in the menu next to **Allow** to stop the prompt.
+- **When the AI calls it:** the model decides when to use a tool. Naming it in the prompt (e.g. *"Use #rnSnippet rn-ctx to create an auth context"*) gets you the template every time.
+- **Cursor, Claude Code and other MCP clients** run the extension's [MCP](https://modelcontextprotocol.io) server with Node.js 18+. Configuration for any MCP client:
+
   ```json
   {
     "mcpServers": {
@@ -133,6 +139,8 @@ Assistants can fetch a template filled in with their own names (e.g. `rn-ctx` wi
     }
   }
   ```
+
+</details>
 
 ---
 
